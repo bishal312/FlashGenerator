@@ -18,7 +18,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="bg-gray-900/80 backdrop-blur-md border-b border-gray-800 text-white">
+    <nav className="bg-gray-900 backdrop-blur-md py-2 border-b border-gray-800 text-white">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
         {/* Left: Logo */}
         <Link href="/" className="text-xl font-bold text-indigo-400 hover:text-indigo-300">
