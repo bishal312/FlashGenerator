@@ -1,7 +1,7 @@
-import React from "react";
+import { redirect } from "next/navigation";
 
-const page = () => {
-  return <div>page</div>;
+const Page = () => {
+  redirect("/new-order");
 };
 
-export default page;
+export default Page;

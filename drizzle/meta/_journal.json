@@ -8,6 +8,27 @@
       "when": 1760625977800,
       "tag": "0000_round_tigra",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1760690704880,
+      "tag": "0001_public_doomsday",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1760778449174,
+      "tag": "0002_sharp_bill_hollister",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1760798804320,
+      "tag": "0003_short_the_twelve",
+      "breakpoints": true
     }
   ]
 }
