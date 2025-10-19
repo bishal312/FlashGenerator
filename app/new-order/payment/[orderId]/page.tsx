@@ -35,12 +35,7 @@ const Page = async ({ params }: Props) => {
     redirect("/new-order");
   }
 
-  if (
-    !orderRecord.network ||
-    !orderRecord.depositAddress ||
-    !orderRecord.depositQrCodeUrl ||
-    !orderRecord.fromAmount
-  ) {
+  if (!orderRecord.network || !orderRecord.fromAmount) {
     return <div>Invalid order</div>;
   }
 
@@ -61,7 +56,7 @@ const Page = async ({ params }: Props) => {
       userId={userRecord.id}
       orderId={orderRecord.id}
       network={orderRecord.network}
-      depositAddress={orderRecord.depositAddress}
+      depositAddress={systemRecord.depositAddress}
       depositQrCodeUrl={systemRecord.depositQrCodeUrl}
       depositedAmount={orderRecord.fromAmount}
     />

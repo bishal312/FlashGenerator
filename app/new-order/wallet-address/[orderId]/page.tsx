@@ -1,7 +1,6 @@
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { orders, user } from "@/lib/db/schema";
-import ChooseNetwork from "@/modules/admin/choose-network/choose-network";
 import Wallet from "@/modules/admin/wallet-address/wallet";
 import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
