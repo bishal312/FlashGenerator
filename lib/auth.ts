@@ -10,6 +10,11 @@ export const auth = betterAuth({
     schema: { ...schema },
   }),
 
+  baseURL:
+    process.env.NODE_ENV === "production"
+      ? `${process.env.BETTER_AUTH_URL}/api/auth`
+      : "http://localhost:3000/api/auth",
+
   emailAndPassword: {
     enabled: true,
     autoSignIn: true,
