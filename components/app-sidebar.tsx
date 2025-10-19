@@ -1,7 +1,12 @@
 "use client";
 
 import * as React from "react";
-import { GalleryVerticalEnd, User2Icon } from "lucide-react";
+import {
+  BookAIcon,
+  GalleryVerticalEnd,
+  PenIcon,
+  User2Icon,
+} from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
 import { NavUser } from "@/components/nav-user";
@@ -34,6 +39,18 @@ const data = {
       title: "Manage Users",
       url: "/admin/manage-users",
       icon: User2Icon,
+      isActive: true,
+    },
+    {
+      title: "Update Deposit Info",
+      url: "/admin/update-deposit-info",
+      icon: PenIcon,
+      isActive: true,
+    },
+    {
+      title: " Create FAQ ",
+      url: "/admin/create-faq",
+      icon: BookAIcon,
       isActive: true,
     },
   ],

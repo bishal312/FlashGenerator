@@ -107,27 +107,45 @@ export const orders = pgTable("orders", {
   toAmount: numeric("to_amount"),
   conversionRate: numeric("conversion_rate"),
 
-  // Step 5: Deposit info
-  depositAddress: text("deposit_address").default(
-    "TEVHMmSTFqSxBegY8VvF8dW5n7ADMzQYgv"
-  ),
-  depositQrCodeUrl: text("deposit_qr_code_url").default(
-    "https://u43okacez0.ufs.sh/f/YHiplYZp8xtB0QhyI2lS83TsowO5gWvuJxSmbEK6aXCejkRM"
-  ),
+  depositAddress: text("deposit_address"),
+  depositQrCodeUrl: text("deposit_qr_code_url"),
 
-  // Step 6: Payment proof
-  txId: text("tx_id"), // user-submitted
+  txId: text("tx_id"),
   paymentProofUrl: text("payment_proof_url"),
 
-  // Status
   status: orderStatusEnum("status").default("submitted").notNull(),
 
-  // Timestamps
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at")
     .defaultNow()
     .$onUpdate(() => new Date()),
 });
 
+export const systemSettings = pgTable("system_settings", {
+  id: text("id")
+    .primaryKey()
+    .$default(() => "system"),
+  depositAddress: text("deposit_address").notNull(),
+  depositQrCodeUrl: text("deposit_qr_code_url").notNull(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const faqs = pgTable("faqs", {
+  id: uuid("id").defaultRandom().primaryKey().notNull(),
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  updatedAt: timestamp("updated_at")
+    .defaultNow()
+    .$onUpdate(() => new Date()),
+  createdAt: timestamp("created_at").defaultNow(),
+});
 export type UserSelectType = InferSelectModel<typeof user>;
 export type UserInsertType = InferInsertModel<typeof user>;
+
+export type OrderSelectType = InferSelectModel<typeof orders>;
+export type OrderInsertType = InferInsertModel<typeof orders>;
+
+export type SystemSettingSelectType = InferSelectModel<typeof systemSettings>;
+
+export type FaqsSelectType = InferSelectModel<typeof faqs>;
+export type FaqsInsertType = InferInsertModel<typeof faqs>;

@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Field, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { payment, PaymentFormState } from "@/lib/actions/payment/payment";
 import Image from "next/image";
@@ -52,9 +53,14 @@ const Payment = ({
         </div>
         <div className="w-full">
           <form action={formAction} className="flex flex-col gap-3">
-            <h1>Network</h1>
-            <Input type="text" value={network} disabled />
-            <Input type="text" value={depositAddress} disabled />
+            <Field>
+              <FieldLabel>Network</FieldLabel>
+              <Input type="text" value={network} disabled />
+            </Field>
+            <Field>
+              <FieldLabel>Deposit Address</FieldLabel>
+              <Input type="text" value={depositAddress} disabled />
+            </Field>
             <input type="hidden" name="userId" value={userId} required />
             <input type="hidden" name="orderId" value={orderId} required />
             <input type="hidden" name="network" value={network} required />

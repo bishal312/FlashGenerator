@@ -1,6 +1,6 @@
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { orders, user } from "@/lib/db/schema";
+import { orders, systemSettings, user } from "@/lib/db/schema";
 import Payment from "@/modules/admin/payment/payment";
 import SelectAmount from "@/modules/admin/select-amount/select-amount";
 import { eq } from "drizzle-orm";
@@ -43,13 +43,26 @@ const Page = async ({ params }: Props) => {
   ) {
     return <div>Invalid order</div>;
   }
+
+  const [systemRecord] = await db
+    .select()
+    .from(systemSettings)
+    .where(eq(systemSettings.id, "system"));
+  if (!systemRecord) {
+    return (
+      <div className="flex flex-col gap-4 min-h-screen items-center justify-center">
+        <h1>Missing deposit address and qr</h1>
+        <p>We&apos;ll fix this shortly</p>
+      </div>
+    );
+  }
   return (
     <Payment
       userId={userRecord.id}
       orderId={orderRecord.id}
       network={orderRecord.network}
       depositAddress={orderRecord.depositAddress}
-      depositQrCodeUrl={orderRecord.depositQrCodeUrl}
+      depositQrCodeUrl={systemRecord.depositQrCodeUrl}
       depositedAmount={orderRecord.fromAmount}
     />
   );

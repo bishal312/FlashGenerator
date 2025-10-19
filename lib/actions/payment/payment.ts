@@ -2,7 +2,7 @@
 
 import { getCurrentUser } from "@/helpers/getCurrentUser";
 import { db } from "@/lib/db";
-import { orders } from "@/lib/db/schema";
+import { orders, systemSettings } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { success } from "zod";
@@ -59,13 +59,25 @@ export async function payment(
         timestamp: Date.now(),
       };
     }
+    const [systemRecord] = await db
+      .select()
+      .from(systemSettings)
+      .where(eq(systemSettings.id, "system"));
+    if (!systemRecord) {
+      return {
+        success: false,
+        message: "Couldn't find the system record",
+        timestamp: Date.now(),
+      };
+    }
+
     if (
-      order.depositAddress !== depositAddress ||
-      order.depositQrCodeUrl !== depositQrCodeUrl
+      depositAddress !== systemRecord.depositAddress ||
+      depositQrCodeUrl !== systemRecord.depositQrCodeUrl
     ) {
       return {
         success: false,
-        message: "Values don't match",
+        message: "Value's didn't match",
         timestamp: Date.now(),
       };
     }
