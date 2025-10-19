@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   Clock,
   DollarSign,
@@ -13,8 +13,9 @@ import {
 } from "lucide-react";
 
 const DashboardView = () => {
+  const router = useRouter();
   return (
-    <div className="min-h-screen text-sm sm:text-base w-full bg-gradient-to-br from-gray-950 via-gray-900 to-black text-gray-100 px-6 sm:px-8 md:px-10 lg:px-20 py-10 md:py-16 overflow-x-hidden mt-10">
+    <div className="min-h-screen text-sm sm:text-base w-full bg-gradient-to-br from-gray-950 via-gray-900 to-black text-gray-100 px-6 sm:px-8 md:px-10 lg:px-20 py-10 md:py-16 overflow-x-hidden">
       <div className="mx-2 md:mx-30 lg:mx-60">
         {/* Greeting */}
         <div className="mb-12 text-center">
@@ -22,24 +23,15 @@ const DashboardView = () => {
             Welcome back, Mitra.exe
           </h1>
           <p className="text-gray-400 text-sm sm:text-base">
-            Your last activity was updated{" "}
-            <span className="text-indigo-400">5 minutes ago</span>
+            Your last activity was updated <span className="text-indigo-400">5 minutes ago</span>
           </p>
         </div>
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
           {[
-            {
-              title: "Approved Amount",
-              value: "$0",
-              icon: <DollarSign className="w-5 h-5" />,
-            },
-            {
-              title: "Pending Amount",
-              value: "$0",
-              icon: <Clock className="w-5 h-5" />,
-            },
+            { title: "Approved Amount", value: "$0", icon: <DollarSign className="w-5 h-5" /> },
+            { title: "Pending Amount", value: "$0", icon: <Clock className="w-5 h-5" /> },
           ].map((item, idx) => (
             <div
               key={idx}
@@ -57,59 +49,51 @@ const DashboardView = () => {
         </div>
 
         {/* Order History */}
-        <Link
-          href="/order-history"
-          className="w-full bg-gradient-to-r from-gray-800 to-gray-900 rounded-2xl p-5 border border-gray-700 hover:border-indigo-500/60 transition-all flex items-center justify-between group mb-10"
-        >
+        <button onClick={() => router.push("/order-history")} className="w-full bg-gradient-to-r from-gray-800 to-gray-900 rounded-2xl p-5 border border-gray-700 hover:border-indigo-500/60 transition-all flex items-center justify-between group mb-10">
           <div className="flex items-center gap-3">
             <History className="w-6 h-6 text-gray-300" />
-            <span className="font-medium text-gray-200">
-              View Order History
-            </span>
+            <span className="font-medium text-gray-200">View Order History</span>
           </div>
           <ArrowRight className="w-5 h-5 text-indigo-400 group-hover:translate-x-1 transition-transform" />
-        </Link>
+        </button>
 
         {/* Order Details */}
         <div className="mb-10">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-semibold text-white">
-              Your Order Details
-            </h2>
-            <Link
-              href="/see-all"
-              className="text-indigo-400 hover:text-indigo-300 transition-colors text-sm font-medium"
-            >
-              See all
-            </Link>
+            <h2 className="text-xl font-semibold text-white">More about FlashGen</h2>
           </div>
 
           <div className="space-y-4">
             {[
               {
                 color: "purple",
+                href: "/how-it-works",
                 label: "How FlashGen Works",
                 icon: <Zap className="w-5 h-5 text-purple-400" />,
               },
               {
                 color: "blue",
+                href: "/supported-platform",
                 label: "Supported Platforms",
                 icon: <MonitorSmartphone className="w-5 h-5 text-blue-400" />,
               },
               {
                 color: "red",
+                href: "/warning",
                 label: "Important Notice",
                 icon: <Info className="w-5 h-5 text-red-400" />,
               },
               {
                 color: "gray",
+                href: "/faq",
                 label: "Frequently Asked Questions",
                 icon: <HelpCircle className="w-5 h-5 text-gray-300" />,
               },
             ].map((item, idx) => (
               <button
+                onClick={() => router.push(item.href)}
                 key={idx}
-                className={`w-full bg-gradient-to-r from-gray-800 to-gray-900 rounded-2xl p-5 border border-gray-700 hover:border-${item.color}-500/50 transition-all flex items-center justify-between group`}
+                className={`w-full bg-gradient-to-r from-gray-800 to-gray-900 rounded-2xl p-5 border border-gray-700 hover:border-indigo-500/60 transition-all flex items-center justify-between group`}
               >
                 <div className="flex items-center gap-3">
                   <div
@@ -117,9 +101,7 @@ const DashboardView = () => {
                   >
                     {item.icon}
                   </div>
-                  <span className="font-medium text-gray-200">
-                    {item.label}
-                  </span>
+                  <span className="font-medium text-gray-200">{item.label}</span>
                 </div>
                 <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-indigo-400 transition-colors" />
               </button>
@@ -128,13 +110,10 @@ const DashboardView = () => {
         </div>
 
         {/* Start New Order */}
-        <Link
-          href="/new-order"
-          className="w-full bg-gradient-to-br from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-700 py-4 px-6 rounded-2xl text-white font-semibold shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 flex items-center justify-center gap-2 transition-all group"
-        >
+        <button onClick={() => router.push("/new-order")} className="w-full bg-gradient-to-br from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-700 py-4 px-6 rounded-2xl text-white font-semibold shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 flex items-center justify-center gap-2 transition-all group">
           <span>Start a New Order</span>
           <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-        </Link>
+        </button>
       </div>
     </div>
   );
