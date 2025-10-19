@@ -79,13 +79,13 @@ const DashboardView = () => {
               },
               {
                 color: "red",
-                href: "/how-it-works",
+                href: "/warning",
                 label: "Important Notice",
                 icon: <Info className="w-5 h-5 text-red-400" />,
               },
               {
                 color: "gray",
-                href: "/how-it-works",
+                href: "/faq",
                 label: "Frequently Asked Questions",
                 icon: <HelpCircle className="w-5 h-5 text-gray-300" />,
               },

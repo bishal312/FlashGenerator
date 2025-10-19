@@ -60,11 +60,11 @@ export default function SupportedPlatform() {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white px-6 sm:px-8 mt-19 pb-5">
+    <div className="min-h-screen  bg-gradient-to-b from-gray-900 to-black text-white px-6 sm:px-8 mt-19 pb-5">
       <h1 className="text-3xl font-bold text-center mb-10">
         Supported Platforms
       </h1>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-autoaaaaaaa">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
         {Platforms.map((platfom, idx) => (
           <div
             key={idx}
