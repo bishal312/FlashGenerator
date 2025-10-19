@@ -91,7 +91,7 @@ export default function SignupPage() {
               className="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:ring-2 focus:ring-indigo-500 outline-none"
               name="email"
               defaultValue={state.inputs?.email}
-              placeholder="m@example.com"
+              placeholder="eg:-John@example.com"
               required
             />
             {state.errors?.properties?.email && (
