@@ -15,7 +15,7 @@ import {
 const DashboardView = () => {
   const router = useRouter();
   return (
-    <div className="min-h-screen text-sm sm:text-base w-full bg-gradient-to-br from-gray-950 via-gray-900 to-black text-gray-100 px-6 sm:px-8 md:px-10 lg:px-20 py-10 md:py-16 overflow-x-hidden">
+    <div className="min-h-screen text-sm sm:text-base mt-5 w-full bg-gradient-to-br from-gray-950 via-gray-900 to-black text-gray-100 px-6 sm:px-8 md:px-10 lg:px-20 py-10 md:py-16 overflow-x-hidden">
       <div className="mx-2 md:mx-30 lg:mx-60">
         {/* Greeting */}
         <div className="mb-12 text-center">
