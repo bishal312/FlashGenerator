@@ -110,7 +110,7 @@ const DashboardView = () => {
         </div>
 
         {/* Start New Order */}
-        <button className="w-full bg-gradient-to-br from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-700 py-4 px-6 rounded-2xl text-white font-semibold shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 flex items-center justify-center gap-2 transition-all group">
+        <button onClick={() => router.push("/new-order")} className="w-full bg-gradient-to-br from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-700 py-4 px-6 rounded-2xl text-white font-semibold shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 flex items-center justify-center gap-2 transition-all group">
           <span>Start a New Order</span>
           <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
         </button>

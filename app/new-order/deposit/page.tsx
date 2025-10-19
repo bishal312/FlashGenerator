@@ -1,7 +1,14 @@
+import Deposit from "@/modules/Deposit";
+import Navbar from "@/modules/Navbar/Navbar";
 import React from "react";
 
 const page = () => {
-  return <div>page</div>;
+  return (
+    <>
+      <Navbar />
+      <Deposit />
+    </>
+  );
 };
 
 export default page;
