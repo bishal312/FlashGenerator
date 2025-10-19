@@ -1,13 +1,7 @@
-import ChooseNetwork from "@/modules/ChooseNetwork";
-import Navbar from "@/modules/Navbar/Navbar";
-import React from "react";
+import { redirect } from "next/navigation";
 
-const page = () => {
-  return (
-    <><Navbar />
-      <ChooseNetwork />
-    </>
-  );
+const Page = async () => {
+  redirect("/new-order");
 };
 
-export default page;
+export default Page;

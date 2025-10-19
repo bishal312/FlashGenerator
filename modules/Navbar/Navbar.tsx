@@ -2,10 +2,17 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { LogOut, User } from "lucide-react";
+import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  const [pending, setPending] = useState<boolean>(false);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -17,11 +24,38 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const handleLogout = async () => {
+    setPending(true);
+    try {
+      await authClient.signOut({
+        fetchOptions: {
+          baseURL:
+            process.env.NODE_ENV === "production"
+              ? `${process.env.BETTER_AUTH_URL}/api/auth`
+              : "http://localhost:3000/api/auth",
+          onSuccess: () => {
+            router.push("/sign-in");
+          },
+          onError: ({ error }) => {
+            toast.error(error.message);
+          },
+        },
+      });
+    } catch {
+      toast.error("Something went wrong!");
+    } finally {
+      setPending(false);
+    }
+  };
+
   return (
     <nav className="fixed w-full bg-gray-900 backdrop-blur-md py-2 border-b border-gray-800 text-white">
       <div className="max-w-7xl w-full mx-auto flex items-center justify-between px-6 py-3">
         {/* Left: Logo */}
-        <Link href="/dashboard" className="text-xl font-bold text-indigo-400 hover:text-indigo-300">
+        <Link
+          href="/dashboard"
+          className="text-xl font-bold text-indigo-400 hover:text-indigo-300"
+        >
           ⚡ FlashGen
         </Link>
 
@@ -33,7 +67,10 @@ export default function Navbar() {
           <Link href="/faq" className="hover:text-indigo-400 transition">
             FAQ
           </Link>
-          <Link href="/how-it-works" className="hover:text-indigo-400 transition">
+          <Link
+            href="/how-it-works"
+            className="hover:text-indigo-400 transition"
+          >
             How It Works
           </Link>
         </div>
@@ -50,12 +87,22 @@ export default function Navbar() {
           {/* Dropdown Menu */}
           {menuOpen && (
             <div className="absolute right-0 mt-2 w-40 bg-gray-800 border border-gray-700 rounded-lg shadow-lg py-2 z-50 animate-fadeIn">
-              <button
-                onClick={() => alert("Logged out")}
-                className="flex items-center w-full px-4 py-2 text-sm hover:bg-gray-700 transition"
-              >
-                <LogOut size={16} className="mr-2" /> Logout
-              </button>
+              {!pending ? (
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center w-full px-4 py-2 text-sm hover:bg-gray-700 transition"
+                  disabled={pending}
+                >
+                  <LogOut size={16} className="mr-2" /> Logout
+                </button>
+              ) : (
+                <div className="flex flex-col items-center gap-4">
+                  <Button disabled className="w-full">
+                    <Spinner />
+                    Logging out...
+                  </Button>
+                </div>
+              )}
             </div>
           )}
         </div>

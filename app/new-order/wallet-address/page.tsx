@@ -1,14 +1,7 @@
-import Navbar from "@/modules/Navbar/Navbar";
-import WalletAddress from "@/modules/WalletAddress";
-import React from "react";
+import { redirect } from "next/navigation";
 
-const page = () => {
-  return (
-    <>
-      <Navbar />
-      <WalletAddress />
-    </>
-  );
+const Page = () => {
+  redirect("/new-order");
 };
 
-export default page;
+export default Page;

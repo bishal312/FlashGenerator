@@ -1,6 +1,15 @@
-import { pgTable, text, timestamp, boolean, pgEnum } from "drizzle-orm/pg-core";
+import { InferInsertModel, InferSelectModel } from "drizzle-orm";
+import {
+  pgTable,
+  text,
+  timestamp,
+  boolean,
+  pgEnum,
+  uuid,
+  numeric,
+} from "drizzle-orm/pg-core";
 
-const roleEnum = pgEnum("role", ["admin", "user"]);
+export const roleEnum = pgEnum("role", ["admin", "user"]);
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -17,6 +26,8 @@ export const user = pgTable("user", {
   banned: boolean("banned").default(false),
   banReason: text("ban_reason"),
   banExpires: timestamp("ban_expires"),
+  username: text("username").unique(),
+  displayUsername: text("display_username"),
 });
 
 export const session = pgTable("session", {
@@ -66,3 +77,75 @@ export const verification = pgTable("verification", {
     .$onUpdate(() => /* @__PURE__ */ new Date())
     .notNull(),
 });
+
+export const orderTokenEnum = pgEnum("order_enum", ["usdt"]);
+export const orderNetworkEnum = pgEnum("order_network", ["trc20"]);
+export const orderStatusEnum = pgEnum("order_status", [
+  "submitted",
+  "pending",
+  "rejected",
+  "success",
+]);
+
+export const orders = pgTable("orders", {
+  id: uuid("id").defaultRandom().primaryKey().notNull(),
+
+  userId: text("user_id")
+    .references(() => user.id, { onDelete: "cascade" })
+    .notNull(),
+
+  token: orderTokenEnum("token").notNull(),
+
+  network: orderNetworkEnum("network"),
+
+  walletAddress: text("wallet_address"),
+  telegramName: text("telegram_name").references(() => user.username, {
+    onDelete: "cascade",
+  }),
+
+  fromAmount: numeric("from_amount"),
+  toAmount: numeric("to_amount"),
+  conversionRate: numeric("conversion_rate"),
+
+  depositAddress: text("deposit_address"),
+  depositQrCodeUrl: text("deposit_qr_code_url"),
+
+  txId: text("tx_id"),
+  paymentProofUrl: text("payment_proof_url"),
+
+  status: orderStatusEnum("status").default("submitted").notNull(),
+
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at")
+    .defaultNow()
+    .$onUpdate(() => new Date()),
+});
+
+export const systemSettings = pgTable("system_settings", {
+  id: text("id")
+    .primaryKey()
+    .$default(() => "system"),
+  depositAddress: text("deposit_address").notNull(),
+  depositQrCodeUrl: text("deposit_qr_code_url").notNull(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const faqs = pgTable("faqs", {
+  id: uuid("id").defaultRandom().primaryKey().notNull(),
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  updatedAt: timestamp("updated_at")
+    .defaultNow()
+    .$onUpdate(() => new Date()),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+export type UserSelectType = InferSelectModel<typeof user>;
+export type UserInsertType = InferInsertModel<typeof user>;
+
+export type OrderSelectType = InferSelectModel<typeof orders>;
+export type OrderInsertType = InferInsertModel<typeof orders>;
+
+export type SystemSettingSelectType = InferSelectModel<typeof systemSettings>;
+
+export type FaqsSelectType = InferSelectModel<typeof faqs>;
+export type FaqsInsertType = InferInsertModel<typeof faqs>;

@@ -17,12 +17,12 @@ export async function requireUser() {
     .where(eq(user.id, session.user.id));
   if (!userRecord) {
     await auth.api.signOut({ headers: await headers() });
-    return redirect("/sign-in");
+    redirect("/sign-in");
   }
 
   if (userRecord.role === "admin") {
-    return redirect("/admin");
+    redirect("/admin");
   }
 
-  return redirect("/dashboard");
+  redirect("/dashboard");
 }

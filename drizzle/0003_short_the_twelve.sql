@@ -1,0 +1,2 @@
+ALTER TABLE "orders" ALTER COLUMN "deposit_address" SET DEFAULT 'TEVHMmSTFqSxBegY8VvF8dW5n7ADMzQYgv';--> statement-breakpoint
+ALTER TABLE "orders" ALTER COLUMN "deposit_qr_code_url" SET DEFAULT 'https://u43okacez0.ufs.sh/f/YHiplYZp8xtB0QhyI2lS83TsowO5gWvuJxSmbEK6aXCejkRM';

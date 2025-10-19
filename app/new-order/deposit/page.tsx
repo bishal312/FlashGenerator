@@ -1,14 +1,7 @@
-import Deposit from "@/modules/Deposit";
-import Navbar from "@/modules/Navbar/Navbar";
-import React from "react";
+import { redirect } from "next/navigation";
 
-const page = () => {
-  return (
-    <>
-      <Navbar />
-      <Deposit />
-    </>
-  );
+const Page = () => {
+  redirect("/new-order");
 };
 
-export default page;
+export default Page;
