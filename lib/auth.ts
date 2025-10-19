@@ -12,7 +12,7 @@ export const auth = betterAuth({
 
   baseURL:
     process.env.NODE_ENV === "production"
-      ? `${process.env.BETTER_AUTH_URL}/api/auth`
+      ? process.env.BETTER_AUTH_URL
       : "http://localhost:3000/api/auth",
 
   emailAndPassword: {
