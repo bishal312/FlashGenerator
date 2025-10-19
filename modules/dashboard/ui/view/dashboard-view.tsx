@@ -73,7 +73,7 @@ const DashboardView = () => {
               },
               {
                 color: "blue",
-                href: "/supported-platform",
+                href: "/flash-supported-platform",
                 label: "Supported Platforms",
                 icon: <MonitorSmartphone className="w-5 h-5 text-blue-400" />,
               },
