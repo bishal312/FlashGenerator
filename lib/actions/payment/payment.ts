@@ -5,7 +5,6 @@ import { db } from "@/lib/db";
 import { orders, systemSettings } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
-import { success } from "zod";
 
 export type PaymentFormState = {
   userId?: string;
@@ -20,6 +19,7 @@ export async function payment(
   prevState: PaymentFormState,
   formData: FormData
 ): Promise<PaymentFormState> {
+  console.log("formData: ", formData);
   const result = await getCurrentUser();
   if (!result.success)
     return {
@@ -81,6 +81,14 @@ export async function payment(
         timestamp: Date.now(),
       };
     }
+    await db
+      .update(orders)
+      .set({
+        depositAddress,
+        depositQrCodeUrl,
+        updatedAt: new Date(),
+      })
+      .where(eq(orders.id, orderId));
   } catch (error) {
     console.log("Error: ", error);
     return {

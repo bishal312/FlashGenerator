@@ -171,7 +171,7 @@ const OrderDetailPage = ({ order }: Props) => {
             <div className="border-l-4 border-purple-500 pl-4">
               <p className="text-sm text-gray-600 mb-1">Deposit Amount</p>
               <p className="text-2xl font-bold text-purple-600">
-                {order.fromAmount} TRX
+                {order.fromAmount} TRC
               </p>
             </div>
             <div className="border-l-4 border-gray-500 pl-4">

@@ -50,7 +50,7 @@ const Order = ({ allOrders }: Props) => {
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600">Deposit:</span>
                   <span className="font-medium text-gray-900">
-                    {order.fromAmount} TRX
+                    {order.fromAmount} TRC
                   </span>
                 </div>
                 <div className="text-sm text-gray-500">
