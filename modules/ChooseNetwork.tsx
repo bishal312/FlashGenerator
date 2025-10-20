@@ -8,7 +8,6 @@ import {
   ChooseNetworkFormState,
 } from "@/lib/actions/choose-network/choose-network";
 import { Search } from "lucide-react";
-import Image from "next/image";
 import React, { useActionState, useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -22,9 +21,9 @@ const ChooseNetwork = ({ userId, orderId }: Props) => {
   const [selectedNetwork, setSelectedNetwork] = useState<string>("");
 
   const allNetworks = [
-    { networkName: "Tron (TRC20)", token: "trc20", confirmStep: 2, minimumRequiredFlash: "$122500" },
-    { networkName: "BNB Smart Chain (BEP20)", token: "bep20", confirmStep: 1, minimumRequiredFlash: "$99700" },
-    { networkName: "Ethereum (ERC20)", token: "erc20", confirmStep: 4, minimumRequiredFlash: "$225000" },
+    { networkName: "Tron (TRC20)", token: "trc20", minimumRequiredFlash: "$122500" },
+    { networkName: "BNB Smart Chain (BEP20)", token: "bep20", minimumRequiredFlash: "$99700" },
+    { networkName: "Ethereum (ERC20)", token: "erc20", minimumRequiredFlash: "$225000" },
   ];
 
   const filteredNetworks = allNetworks.filter((network) =>
@@ -77,10 +76,11 @@ const ChooseNetwork = ({ userId, orderId }: Props) => {
               <div
                 key={network.token}
                 onClick={() => setSelectedNetwork(network.token)}
-                className={`w-full cursor-pointer px-4 py-4 rounded-xl border-2 transition-all ${selectedNetwork === network.token
-                  ? "border-indigo-500 ring-2 ring-indigo-500/40 bg-gray-800/80"
-                  : "border-gray-700 hover:border-gray-500 bg-gray-900/50"
-                  }`}
+                className={`w-full cursor-pointer px-4 py-4 rounded-xl border-2 transition-all ${
+                  selectedNetwork === network.token
+                    ? "border-indigo-500 ring-2 ring-indigo-500/40 bg-gray-800/80"
+                    : "border-gray-700 hover:border-gray-500 bg-gray-900/50"
+                }`}
               >
                 <input
                   type="radio"
@@ -92,11 +92,7 @@ const ChooseNetwork = ({ userId, orderId }: Props) => {
                   required
                 />
                 <FieldGroup className="flex flex-row items-center gap-2">
-                  <p className="flex flex-col text-white font-medium">
-                    {network.networkName}
-                    <span className="text-gray-400 font-normal text-sm">{network.confirmStep} Block Confirmation</span>
-                    <span className="text-gray-400 font-normal text-sm">Minimum required flash:{network.minimumRequiredFlash}</span>
-                  </p>
+                  <p>{network.networkName}</p>
                 </FieldGroup>
               </div>
             ))

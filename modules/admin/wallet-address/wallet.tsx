@@ -32,29 +32,34 @@ const Wallet = ({ userId, orderId, username }: Props) => {
   }, [state.success, state.message, state.timestamp]);
 
   return (
-    <div className="min-h-screen flex flex-col justify-center">
-      <form
-        action={formAction}
-        className="max-w-xl shadow-2xl mx-auto flex flex-col gap-3  w-full py-5 px-3 rounded-lg"
-      >
-        <Field>
-          <FieldLabel htmlFor="wallet-address">Wallet Address</FieldLabel>
-          <Input type="text" id="wallet-address" name="walletAddress" />
-          {state.errors?.properties?.walletAddress && (
-            <FieldError>{state.errors.properties.walletAddress[0]}</FieldError>
-          )}
-        </Field>
-        <Field>
-          <FieldLabel>Telegram username</FieldLabel>
-          <Input disabled value={username} name="username" />
-        </Field>
-        <input type="hidden" name="userId" value={userId} />
-        <input type="hidden" name="orderId" value={orderId} />
-        <input type="hidden" name="username" value={username} />
-        <Button type="submit" disabled={isPending}>
-          Continue
-        </Button>
-      </form>
+    <div className="min-h-screen bg-gradient-to-b from-[#0b1a18] to-[#000] flex flex-col items-center justify-center px-4">
+      <div className="w-full max-w-md bg-[#0e2321]/50 rounded-2xl px-8 pt-7 pb-5 border border-gray-700 shadow-lg">
+        <h1 className="text-center text-2xl font-semibold text-white mb-6">
+          Add Your Wallet Address
+        </h1>
+        <form
+          action={formAction}
+          className="mb-5"
+        >
+          <Field>
+            <FieldLabel htmlFor="wallet-address" className="block text-sm font-medium text-gray-400">Wallet Address</FieldLabel>
+            <input type="text" id="wallet-address" name="walletAddress" placeholder="Enter your wallet Address" className="w-full bg-gray-900 text-gray-200 placeholder-gray-500 border border-gray-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all" />
+            {state.errors?.properties?.walletAddress && (
+              <FieldError>{state.errors.properties.walletAddress[0]}</FieldError>
+            )}
+          </Field>
+          <Field>
+            <FieldLabel className="block text-sm font-medium text-gray-400 mt-4">Telegram username</FieldLabel>
+            <Input disabled value={username} name="username" className="text-white" />
+          </Field>
+          <input type="hidden" name="userId" value={userId} />
+          <input type="hidden" name="orderId" value={orderId} />
+          <input type="hidden" name="username" value={username} />
+          <Button type="submit" disabled={isPending} className="mt-5 w-full bg-indigo-600 hover:bg-indigo-700">
+            Continue
+          </Button>
+        </form>
+      </div>
     </div>
   );
 };

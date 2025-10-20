@@ -63,9 +63,9 @@ export default function HowItWorks() {
                 </h2>
               </div>
             </div>
-            <p className="text-gray-300 px-5 pb-5 mt-2 text-sm">
-              {step.description}
-            </p>
+                <p className="text-gray-300 px-5 pb-5 mt-2 text-sm">
+                  {step.description}
+                </p>
           </div>
         ))}
       </div>
