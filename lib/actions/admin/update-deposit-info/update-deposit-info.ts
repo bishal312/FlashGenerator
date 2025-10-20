@@ -9,6 +9,7 @@ export type UpdateDepositInfoFormState = {
   success: boolean;
   depositAddress?: string;
   newQRurl?: string;
+  conversionRate?: string;
   timestamp: number;
   message: string;
 };
@@ -28,11 +29,13 @@ export async function updateDepositInfo(
   }
   const depositAddress = formData.get("depositAddress") as string;
   const newQRurl = formData.get("newQRurl") as string;
+  const conversionRate = Number(formData.get("conversionRate"));
 
   try {
     await db.update(systemSettings).set({
       depositAddress,
       depositQrCodeUrl: newQRurl,
+      conversionRate,
       updatedAt: new Date(),
     });
     revalidatePath("/admin/update-deposit-info");

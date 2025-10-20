@@ -15,15 +15,15 @@ import { toast } from "sonner";
 type Props = {
   userId: string;
   orderId: string;
+  conversionRate: number;
 };
 
-const SelectAmount = ({ userId, orderId }: Props) => {
+const SelectAmount = ({ userId, orderId, conversionRate }: Props) => {
   const [trcValue, setTrcValue] = useState("");
   const [flashUSDT, setFlashUSDT] = useState<number>(0);
-  const conversionRate = 0.1;
   useEffect(() => {
     setFlashUSDT(Number(trcValue) / conversionRate);
-  }, [trcValue]);
+  }, [trcValue, conversionRate]);
   const initialState: SelectAmountFormState = {
     errors: {},
     message: "",

@@ -26,6 +26,9 @@ import { createFaq, FaqFormState } from "@/lib/actions/admin/faqs/create-faq";
 import { useActionState, useEffect, useState } from "react";
 import { Spinner } from "@/components/ui/spinner";
 import { toast } from "sonner";
+import { PenIcon, Trash } from "lucide-react";
+import EditFaq from "./edit-faq";
+import DeleteFaq from "./delete-faq";
 
 type Props = {
   allFaqs: FaqsSelectType[];
@@ -33,6 +36,9 @@ type Props = {
 
 const Faq = ({ allFaqs }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [selectedFaq, setSelectedFaq] = useState<FaqsSelectType | null>(null);
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const initialState: FaqFormState = {
     message: "",
     success: false,
@@ -51,6 +57,7 @@ const Faq = ({ allFaqs }: Props) => {
       toast.error(state.message, { position: "top-right" });
     }
   }, [state.success, state.message, state.timestamp]);
+
   return (
     <div className="flex flex-col items-center min-h-screen">
       <div className="bg-slate-50 max-w-full w-full felx flex-col py-5 px-7 rounded-lg">
@@ -122,7 +129,33 @@ const Faq = ({ allFaqs }: Props) => {
           >
             {allFaqs.map((faq) => (
               <AccordionItem key={faq.id} value={faq.id}>
-                <AccordionTrigger>{faq.title}</AccordionTrigger>
+                <div className="flex justify-between items-center">
+                  <AccordionTrigger className="flex-1 w-full">
+                    <p>{faq.title}</p>
+                  </AccordionTrigger>
+                  <div className="flex items-center gap-2">
+                    <Button
+                      onClick={() => {
+                        setSelectedFaq(faq);
+                        setIsEditing(true);
+                      }}
+                      variant="outline"
+                      size="sm"
+                    >
+                      <PenIcon size={14} />
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        setSelectedFaq(faq);
+                        setIsDeleting(true);
+                      }}
+                      variant="destructive"
+                      size="sm"
+                    >
+                      <Trash size={14} />
+                    </Button>
+                  </div>
+                </div>
                 <AccordionContent className="flex flex-col gap-4 text-balance">
                   <p>{faq.description}</p>
                 </AccordionContent>
@@ -133,6 +166,17 @@ const Faq = ({ allFaqs }: Props) => {
           <div className="py-5">
             <h1>No faqs found, create one</h1>
           </div>
+        )}
+
+        {isEditing && selectedFaq && (
+          <EditFaq faq={selectedFaq} onClose={() => setIsEditing(false)} />
+        )}
+
+        {isDeleting && selectedFaq && (
+          <DeleteFaq
+            faqId={selectedFaq.id}
+            onClose={() => setIsDeleting(false)}
+          />
         )}
       </div>
     </div>

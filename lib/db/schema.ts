@@ -1,4 +1,4 @@
-import { InferInsertModel, InferSelectModel } from "drizzle-orm";
+import { InferInsertModel, InferSelectModel, relations } from "drizzle-orm";
 import {
   pgTable,
   text,
@@ -103,9 +103,9 @@ export const orders = pgTable("orders", {
     onDelete: "cascade",
   }),
 
-  fromAmount: numeric("from_amount"),
-  toAmount: numeric("to_amount"),
-  conversionRate: numeric("conversion_rate"),
+  fromAmount: numeric("from_amount", { mode: "number" }),
+  toAmount: numeric("to_amount", { mode: "number" }),
+  conversionRate: numeric("conversion_rate", { mode: "number" }),
 
   depositAddress: text("deposit_address"),
   depositQrCodeUrl: text("deposit_qr_code_url"),
@@ -127,6 +127,7 @@ export const systemSettings = pgTable("system_settings", {
     .$default(() => "system"),
   depositAddress: text("deposit_address").notNull(),
   depositQrCodeUrl: text("deposit_qr_code_url").notNull(),
+  conversionRate: numeric("conversion_rate", { mode: "number" }).notNull(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
@@ -139,6 +140,18 @@ export const faqs = pgTable("faqs", {
     .$onUpdate(() => new Date()),
   createdAt: timestamp("created_at").defaultNow(),
 });
+
+export const orderRelations = relations(orders, ({ one }) => ({
+  user: one(user, {
+    fields: [orders.userId],
+    references: [user.id],
+  }),
+}));
+
+export const userRelations = relations(user, ({ many }) => ({
+  many: many(orders),
+}));
+
 export type UserSelectType = InferSelectModel<typeof user>;
 export type UserInsertType = InferInsertModel<typeof user>;
 

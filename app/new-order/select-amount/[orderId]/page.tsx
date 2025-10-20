@@ -1,6 +1,6 @@
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { orders, user } from "@/lib/db/schema";
+import { orders, systemSettings, user } from "@/lib/db/schema";
 import SelectAmount from "@/modules/admin/select-amount/select-amount";
 import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
@@ -33,7 +33,17 @@ const Page = async ({ params }: Props) => {
   if (!orderRecord) {
     redirect("/new-order");
   }
-  return <SelectAmount userId={userRecord.id} orderId={orderRecord.id} />;
+  const [systemRecord] = await db
+    .select()
+    .from(systemSettings)
+    .where(eq(systemSettings.id, "system"));
+  return (
+    <SelectAmount
+      userId={userRecord.id}
+      orderId={orderRecord.id}
+      conversionRate={systemRecord.conversionRate}
+    />
+  );
 };
 
 export default Page;

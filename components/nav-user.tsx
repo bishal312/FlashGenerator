@@ -46,10 +46,6 @@ export function NavUser({
     try {
       await authClient.signOut({
         fetchOptions: {
-          baseURL:
-            process.env.NODE_ENV === "production"
-              ? `${process.env.BETTER_AUTH_URL}/api/auth`
-              : "http://localhost:3000/api/auth",
           onSuccess: () => {
             router.push("/sign-in");
           },

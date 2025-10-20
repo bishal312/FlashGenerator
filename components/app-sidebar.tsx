@@ -5,6 +5,7 @@ import {
   BookAIcon,
   GalleryVerticalEnd,
   PenIcon,
+  ShoppingBasket,
   User2Icon,
 } from "lucide-react";
 
@@ -22,16 +23,10 @@ import { authClient } from "@/lib/auth-client";
 import { Skeleton } from "./ui/skeleton";
 
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
   teams: [
     {
-      name: "Acme Inc",
+      name: "Flash USDT",
       logo: GalleryVerticalEnd,
-      plan: "Enterprise",
     },
   ],
   navMain: [
@@ -48,9 +43,15 @@ const data = {
       isActive: true,
     },
     {
-      title: " Create FAQ ",
+      title: "Create FAQ",
       url: "/admin/create-faq",
       icon: BookAIcon,
+      isActive: true,
+    },
+    {
+      title: "Orders",
+      url: "/admin/orders",
+      icon: ShoppingBasket,
       isActive: true,
     },
   ],

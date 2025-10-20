@@ -14,7 +14,7 @@ type Props = {
   network: string;
   depositAddress: string;
   depositQrCodeUrl: string;
-  depositedAmount: string;
+  depositedAmount: number;
 };
 
 const Payment = ({
@@ -37,7 +37,7 @@ const Payment = ({
 
   useEffect(() => {
     if (!state.success && state.message) {
-      toast.message(state.message, { position: "top-center" });
+      toast.error(state.message, { position: "top-center" });
     }
   }, [state.success, state.message, state.timestamp]);
   return (

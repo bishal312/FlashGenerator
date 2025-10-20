@@ -2,7 +2,6 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { orders, systemSettings, user } from "@/lib/db/schema";
 import Payment from "@/modules/admin/payment/payment";
-import SelectAmount from "@/modules/admin/select-amount/select-amount";
 import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";

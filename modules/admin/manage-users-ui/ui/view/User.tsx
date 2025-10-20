@@ -1,17 +1,8 @@
 "use client";
 
+import React, { useEffect, useState } from "react";
 import { UserSelectType } from "@/lib/db/schema";
-
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Separator } from "@/components/ui/separator";
@@ -24,6 +15,7 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group";
 import { Eye, EyeOff } from "lucide-react";
+import Link from "next/link";
 
 type Props = {
   user: UserSelectType;
@@ -41,13 +33,17 @@ const User = ({ user }: Props) => {
   useEffect(() => {
     if (newPassword !== confirmNewPassword) {
       setPasswordNotEqualError(true);
+    } else {
+      setPasswordNotEqualError(false);
     }
   }, [newPassword, confirmNewPassword]);
+
   const handleUpdatePassword = async () => {
     setIsPending(true);
 
     if (newPassword !== confirmNewPassword) {
       toast.error("Password didn't match", { position: "top-center" });
+      setIsPending(false);
       return;
     }
     try {
@@ -58,7 +54,7 @@ const User = ({ user }: Props) => {
         },
         {
           onSuccess: () => {
-            toast.success("Password updated successfuly", {
+            toast.success("Password updated successfully", {
               position: "top-center",
             });
           },
@@ -70,99 +66,171 @@ const User = ({ user }: Props) => {
     } catch {
     } finally {
       setShowUpdatePassword(false);
+      setNewPassword("");
+      setConfirmNewPassword("");
       setIsPending(false);
     }
   };
 
   return (
-    <>
-      <Card>
-        <CardHeader>
-          <CardTitle>{user.username}</CardTitle>
-          <CardDescription>{user.email}</CardDescription>
-          <CardAction>
+    <div className="min-h-screen bg-gray-50 p-6">
+      <div className="max-w-3xl mx-auto">
+        <div className="mb-6">
+          <Link
+            href="/admin/manage-users"
+            className="text-blue-600 hover:text-blue-700 text-sm font-medium mb-2 inline-block"
+          >
+            ← Back to Users
+          </Link>
+          <h1 className="text-3xl font-bold text-gray-900">Update User</h1>
+        </div>
+
+        <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6 mb-6">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-16 h-16 flex-shrink-0 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-md">
+              {user.username?.charAt(0).toUpperCase() ||
+                user.email?.charAt(0).toUpperCase()}
+            </div>
+            <div className="flex-1 min-w-0">
+              <h2 className="text-2xl font-semibold text-gray-900 truncate">
+                {user.username || "No username"}
+              </h2>
+              <p className="text-gray-600 truncate">
+                {user.email || "No email"}
+              </p>
+            </div>
+          </div>
+
+          <div className="space-y-3 pt-4 border-t border-gray-100">
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-gray-600">User ID:</span>
+              <span className="text-sm font-mono text-gray-900">{user.id}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-gray-600">Created:</span>
+              <span className="text-sm text-gray-900">
+                {user.createdAt?.toLocaleDateString() || "N/A"}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Password Update Section */}
+        <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900">
+                Password Management
+              </h3>
+              <p className="text-sm text-gray-600 mt-1">
+                Update the user&apos;s password securely
+              </p>
+            </div>
             {!showUpdatePassword ? (
               <Button onClick={() => setShowUpdatePassword(true)}>
                 Update Password
               </Button>
             ) : (
               <Button
-                onClick={() => setShowUpdatePassword(false)}
+                onClick={() => {
+                  setShowUpdatePassword(false);
+                  setNewPassword("");
+                  setConfirmNewPassword("");
+                }}
                 disabled={isPending}
+                variant="outline"
               >
                 Cancel
               </Button>
             )}
-          </CardAction>
-        </CardHeader>
-      </Card>
-
-      {showUpdatePassword && (
-        <CardContent className="pt-4 sm:pt-6">
-          <div className="space-y-5">
-            <div className="space-y-2">
-              <Label
-                htmlFor="newPassword"
-                className="text-sm font-medium text-gray-900"
-              >
-                New Password
-              </Label>
-              <InputGroup>
-                <InputGroupInput
-                  id="password"
-                  name="password"
-                  type={inputType}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                  required
-                />
-                <InputGroupAddon align="inline-end" className="cursor-default">
-                  {inputType === "password" ? (
-                    <EyeOff onClick={() => setInputType("text")} />
-                  ) : (
-                    <Eye onClick={() => setInputType("password")} />
-                  )}
-                </InputGroupAddon>
-              </InputGroup>
-            </div>
-            <Field className="space-y-2">
-              <FieldLabel
-                htmlFor="confirmPassword"
-                className="text-sm font-medium text-gray-900"
-              >
-                Confirm New Password
-              </FieldLabel>
-              <InputGroup>
-                <InputGroupInput
-                  id="password"
-                  name="password"
-                  type={inputType}
-                  onChange={(e) => setConfirmNewPassword(e.target.value)}
-                  required
-                />
-                <InputGroupAddon align="inline-end" className="cursor-default">
-                  {inputType === "password" ? (
-                    <EyeOff onClick={() => setInputType("text")} />
-                  ) : (
-                    <Eye onClick={() => setInputType("password")} />
-                  )}
-                </InputGroupAddon>
-              </InputGroup>
-            </Field>
-            {newPassword !== confirmNewPassword && passwordNotEqualError && (
-              <FieldError>Password didn&apos;t match</FieldError>
-            )}
-            <Separator />
-            <Button
-              className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
-              onClick={handleUpdatePassword}
-              disabled={isPending}
-            >
-              {isPending ? <Spinner /> : "Update Password"}
-            </Button>
           </div>
-        </CardContent>
-      )}
-    </>
+
+          {showUpdatePassword && (
+            <>
+              <Separator className="my-4" />
+              <div className="space-y-5">
+                <div className="space-y-2">
+                  <Label
+                    htmlFor="newPassword"
+                    className="text-sm font-medium text-gray-900"
+                  >
+                    New Password
+                  </Label>
+                  <InputGroup>
+                    <InputGroupInput
+                      id="newPassword"
+                      name="newPassword"
+                      type={inputType}
+                      value={newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
+                      placeholder="Enter new password"
+                      required
+                    />
+                    <InputGroupAddon
+                      align="inline-end"
+                      className="cursor-pointer"
+                    >
+                      {inputType === "password" ? (
+                        <EyeOff onClick={() => setInputType("text")} />
+                      ) : (
+                        <Eye onClick={() => setInputType("password")} />
+                      )}
+                    </InputGroupAddon>
+                  </InputGroup>
+                </div>
+
+                <Field className="space-y-2">
+                  <FieldLabel
+                    htmlFor="confirmPassword"
+                    className="text-sm font-medium text-gray-900"
+                  >
+                    Confirm New Password
+                  </FieldLabel>
+                  <InputGroup>
+                    <InputGroupInput
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      type={inputType}
+                      value={confirmNewPassword}
+                      onChange={(e) => setConfirmNewPassword(e.target.value)}
+                      placeholder="Confirm new password"
+                      required
+                    />
+                    <InputGroupAddon
+                      align="inline-end"
+                      className="cursor-pointer"
+                    >
+                      {inputType === "password" ? (
+                        <EyeOff onClick={() => setInputType("text")} />
+                      ) : (
+                        <Eye onClick={() => setInputType("password")} />
+                      )}
+                    </InputGroupAddon>
+                  </InputGroup>
+                  {newPassword !== confirmNewPassword &&
+                    passwordNotEqualError && (
+                      <FieldError>Passwords don&apos;t match</FieldError>
+                    )}
+                </Field>
+
+                <Button
+                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
+                  onClick={handleUpdatePassword}
+                  disabled={
+                    isPending ||
+                    !newPassword ||
+                    !confirmNewPassword ||
+                    passwordNotEqualError
+                  }
+                >
+                  {isPending ? <Spinner /> : "Update Password"}
+                </Button>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -5,7 +5,7 @@ import { db } from "@/lib/db";
 import { orders } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
-import z, { success } from "zod";
+import z from "zod";
 
 export type SelectAmountFormState = {
   errors?: {
@@ -113,9 +113,9 @@ export async function selectAmount(
     await db
       .update(orders)
       .set({
-        fromAmount: String(fromAmount),
-        toAmount: String(toAmount),
-        conversionRate: String(conversionRate),
+        fromAmount,
+        toAmount,
+        conversionRate,
         updatedAt: new Date(),
       })
       .where(eq(orders.id, orderId));
