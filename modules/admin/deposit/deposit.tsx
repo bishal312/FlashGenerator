@@ -1,4 +1,5 @@
 "use client";
+
 import CustomImageUploader from "@/components/CustomImageButton";
 import { Button } from "@/components/ui/button";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
@@ -6,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { DepositFormState, deposit } from "@/lib/actions/deposit/deposit";
 import React, { useActionState, useEffect, useState } from "react";
 import { toast } from "sonner";
+import { UploadCloud, CheckCircle2, AlertTriangle } from "lucide-react";
 
 type Props = {
   userId: string;
@@ -15,65 +17,92 @@ type Props = {
 const Deposit = ({ userId, orderId }: Props) => {
   const [uploadedImageUrl, setUploadedImageUrl] = useState<string>("");
   const [transactionId, setTransactionId] = useState<string>("");
-  const [transactionLengthError, setTransactionLenghtError] =
-    useState<boolean>(false);
+  const [transactionLengthError, setTransactionLengthError] = useState<boolean>(false);
+
   const initialState: DepositFormState = {
     errors: {},
     message: "",
     success: false,
     timestamp: Date.now(),
   };
-  const [state, formAction, isPending] = useActionState<
-    DepositFormState,
-    FormData
-  >(deposit, initialState);
+
+  const [state, formAction, isPending] = useActionState<DepositFormState, FormData>(
+    deposit,
+    initialState
+  );
+
   useEffect(() => {
     if (!state.success && state.message) {
-      toast.message(state.message, { position: "top-center" });
+      toast(state.message, { position: "top-center" });
     }
   }, [state.success, state.message, state.timestamp]);
 
   useEffect(() => {
-    const transactionArray = transactionId.split("");
-    console.log("transactionarray: ", transactionArray);
-    if (transactionId && transactionArray.length < 34) {
-      setTransactionLenghtError(true);
-    } else {
-      setTransactionLenghtError(false);
-    }
+    setTransactionLengthError(transactionId.length > 0 && transactionId.length < 34);
   }, [transactionId]);
+
   return (
-    <div className="min-h-screen w-full flex justify-center items-center">
-      <div className="flex flex-col gap-8 bg-slate-50 shadow-xl py-5 px-7 rounded-lg max-w-2xl w-full">
-        <h1>Verify Payment</h1>
-        <form action={formAction} className="flex flex-col gap-4">
+    <div className="min-h-screen w-full flex justify-center items-center bg-gradient-to-b from-[#061b19] to-black px-4">
+      <div className="flex flex-col gap-8 bg-[#111111] border border-gray-800 shadow-lg shadow-black/40 py-8 px-7 rounded-2xl max-w-2xl w-full">
+        {/* Title */}
+        <h1 className="text-2xl font-bold text-gray-100 tracking-wide text-center">
+          Verify Payment
+        </h1>
+
+        {/* Form */}
+        <form action={formAction} className="flex flex-col gap-6">
+          {/* Transaction ID */}
           <Field>
-            <FieldLabel htmlFor="transactionId">
+            <FieldLabel htmlFor="transactionId" className="text-gray-300">
               Transaction / Order ID *
             </FieldLabel>
-            <Input
-              placeholder="Enter your Transaction ID"
-              name="transactionId"
-              onChange={(e) => setTransactionId(e.target.value)}
-              value={transactionId}
-              required
-            />
+            <div className="relative">
+              <input
+                placeholder="Enter your Transaction ID"
+                name="transactionId"
+                onChange={(e) => setTransactionId(e.target.value)}
+                value={transactionId}
+                required
+                className={`w-full p-2 rounded-md bg-black border 
+                        ${transactionLengthError ? "border-red-600" : "border-gray-700"} 
+                          focus:outline-none focus:ring-1 focus:ring-indigo-600 
+                         text-gray-100 placeholder-gray-500`}
+              />
+
+              {transactionId.length > 0 && !transactionLengthError && (
+                <CheckCircle2 className="absolute right-3 top-3 text-indigo-500 w-5 h-5" />
+              )}
+              {transactionLengthError && (
+                <AlertTriangle className="absolute right-3 top-3 text-red-500 w-5 h-5" />
+              )}
+            </div>
             {transactionLengthError && (
-              <FieldError>
-                Transaction id must be at least 34 characters!
+              <FieldError className="text-red-400 text-sm mt-1">
+                Transaction ID must be at least 34 characters long.
               </FieldError>
             )}
           </Field>
-          <Field className="flex flex-col gap-2">
-            <FieldLabel htmlFor="paymentScreenshotUrl">
-              Image (Optional)
+
+          {/* Upload Screenshot */}
+          <Field className="flex flex-col gap-3">
+            <FieldLabel htmlFor="paymentScreenshotUrl" className="text-gray-300">
+              Upload Payment Screenshot (Optional)
             </FieldLabel>
-            <CustomImageUploader
-              imageUploadName="upload payment screenshot"
-              onUploadComplete={setUploadedImageUrl}
-              currentImage={uploadedImageUrl}
-            />
+
+            <div className="bg-gray-900 border border-gray-700 rounded-xl p-4 flex flex-col items-center justify-center gap-3">
+              <UploadCloud className="text-gray-400 w-8 h-8" />
+              <CustomImageUploader
+                imageUploadName="Upload Payment Screenshot"
+                onUploadComplete={setUploadedImageUrl}
+                currentImage={uploadedImageUrl}
+              />
+              {uploadedImageUrl && (
+                <p className="text-sm text-indigo-400 mt-1">Image uploaded successfully.</p>
+              )}
+            </div>
           </Field>
+
+          {/* Hidden Inputs */}
           <input type="hidden" name="userId" value={userId} required />
           <input type="hidden" name="orderId" value={orderId} required />
           <input
@@ -82,7 +111,13 @@ const Deposit = ({ userId, orderId }: Props) => {
             value={uploadedImageUrl}
             required
           />
-          <Button type="submit" disabled={isPending || transactionLengthError}>
+
+          {/* Submit Button */}
+          <Button
+            type="submit"
+            disabled={isPending || transactionLengthError}
+            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-lg text-lg font-medium transition disabled:opacity-50"
+          >
             Continue
           </Button>
         </form>
