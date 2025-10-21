@@ -2,6 +2,7 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { orders, systemSettings, user } from "@/lib/db/schema";
 import Payment from "@/modules/admin/payment/payment";
+import Navbar from "@/modules/Navbar/Navbar";
 import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
@@ -51,14 +52,17 @@ const Page = async ({ params }: Props) => {
     );
   }
   return (
-    <Payment
-      userId={userRecord.id}
-      orderId={orderRecord.id}
-      network={orderRecord.network}
-      depositAddress={systemRecord.depositAddress}
-      depositQrCodeUrl={systemRecord.depositQrCodeUrl}
-      depositedAmount={orderRecord.fromAmount}
-    />
+    <>
+      <Navbar />
+      <Payment
+        userId={userRecord.id}
+        orderId={orderRecord.id}
+        network={orderRecord.network}
+        depositAddress={systemRecord.depositAddress}
+        depositQrCodeUrl={systemRecord.depositQrCodeUrl}
+        depositedAmount={orderRecord.fromAmount}
+      />
+    </>
   );
 };
 

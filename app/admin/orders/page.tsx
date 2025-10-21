@@ -2,7 +2,7 @@ import { requireAdmin } from "@/helpers/requireAdmin";
 import { db } from "@/lib/db";
 import { orders, OrderSelectType, UserSelectType } from "@/lib/db/schema";
 import Order from "@/modules/admin/orders/Order";
-import { and, asc, gte, isNotNull, ne } from "drizzle-orm";
+import { and, desc, gte, isNotNull, ne } from "drizzle-orm";
 
 type OrderWithUser = (OrderSelectType & {
   user: UserSelectType;
@@ -26,7 +26,7 @@ const Page = async () => {
     with: {
       user: true,
     },
-    orderBy: asc(orders.createdAt),
+    orderBy: desc(orders.createdAt),
   });
   return <Order allOrders={allOrders} />;
 };

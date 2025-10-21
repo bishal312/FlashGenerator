@@ -112,7 +112,7 @@ export default function CustomImageUploader({
           >
             {isUploading ? (
               <>
-                <Loader2 className="h-8 w-8 text-gray-600 animate-spin" />
+                <Loader2 className="h-8 w-8 text-gray-200 animate-spin" />
                 <span className="text-sm font-medium text-gray-700 mt-1">
                   Uploading...
                 </span>

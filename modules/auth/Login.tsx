@@ -76,6 +76,7 @@ export default function LoginPage() {
                 placeholder="••••••••"
                 defaultValue={state.inputs?.password}
                 type={inputType}
+                className="text-gray-200"
               />
               <InputGroupAddon align="inline-end" className="cursor-default">
                 {inputType === "password" ? (

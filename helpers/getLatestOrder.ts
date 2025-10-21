@@ -1,6 +1,6 @@
 "use server";
 
-import { orders, OrderSelectType } from "@/lib/db/schema";
+import { OrderSelectType } from "@/lib/db/schema";
 import { getCurrentUser } from "./getCurrentUser";
 import { db } from "@/lib/db";
 
@@ -25,6 +25,8 @@ export async function getLatestOrder(): Promise<LatestOrder> {
     orderBy: (fields, { desc }) => desc(fields.createdAt),
     limit: 1,
   });
+
+  console.log("latestorder:", latestOrder);
 
   if (latestOrder.length === 0) {
     return {

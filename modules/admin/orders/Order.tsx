@@ -1,5 +1,6 @@
 import React from "react";
 import { UserSelectType, OrderSelectType } from "@/lib/db/schema";
+import Link from "next/link";
 
 type Props = {
   allOrders: (OrderSelectType & {
@@ -58,12 +59,12 @@ const Order = ({ allOrders }: Props) => {
                 </div>
               </div>
 
-              <a
+              <Link
                 href={`/admin/orders/${order.id}`}
                 className="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors"
               >
                 View Details
-              </a>
+              </Link>
             </div>
           ))}
         </div>

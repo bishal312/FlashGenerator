@@ -164,8 +164,12 @@ const DashboardView = ({ userRecord, total, latestOrder }: Props) => {
                 </p>
               </div>
               <div className="flex flex-col gap-3">
-                <p className="font-semibold">FLASH USDT: $142001</p>
-                <p className="text-gray-400">Date: 10/19/2025</p>
+                <p className="font-semibold">
+                  FLASH USDT: ${latestOrder.toAmount}
+                </p>
+                <p className="text-gray-400">
+                  Date: {latestOrder.createdAt?.toDateString()}
+                </p>
               </div>
             </Link>
           </div>

@@ -3,11 +3,10 @@
 import CustomImageUploader from "@/components/CustomImageButton";
 import { Button } from "@/components/ui/button";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
 import { DepositFormState, deposit } from "@/lib/actions/deposit/deposit";
 import React, { useActionState, useEffect, useState } from "react";
 import { toast } from "sonner";
-import { UploadCloud, CheckCircle2, AlertTriangle } from "lucide-react";
+import { CheckCircle2, AlertTriangle } from "lucide-react";
 import { Spinner } from "@/components/ui/spinner";
 
 type Props = {
