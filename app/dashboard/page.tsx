@@ -1,6 +1,8 @@
+import { getLatestOrder } from "@/helpers/getLatestOrder";
+import { getTotals } from "@/helpers/getTotals";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { user } from "@/lib/db/schema";
+import { OrderSelectType, user } from "@/lib/db/schema";
 import DashboardView from "@/modules/dashboard/ui/view/dashboard-view";
 import Navbar from "@/modules/Navbar/Navbar";
 import { eq } from "drizzle-orm";
@@ -24,10 +26,32 @@ const page = async () => {
   if (userRecord.role === "admin") {
     return redirect("/admin");
   }
+
+  const total = await getTotals();
+  let pendingAmountTotal: number = 0;
+  let approvedAmountTotal: number = 0;
+  if (total.success) {
+    pendingAmountTotal = total.pendingSum;
+    approvedAmountTotal = total.approvedSum;
+  }
+
+  let latestOrder: OrderSelectType | null = null;
+  const order = await getLatestOrder();
+  if (order.success) {
+    latestOrder = order.latestOrder;
+  }
+
   return (
     <>
       <Navbar />
-      <DashboardView />
+      <DashboardView
+        userRecord={userRecord}
+        total={{
+          pendingAmount: pendingAmountTotal ?? 0,
+          approvedAmount: approvedAmountTotal ?? 0,
+        }}
+        latestOrder={latestOrder}
+      />
     </>
   );
 };

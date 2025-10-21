@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronsUpDown, LogOut } from "lucide-react";
+import { ChevronsUpDown, LogOut, User } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -23,6 +23,7 @@ import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { Button } from "./ui/button";
 import { Spinner } from "./ui/spinner";
+import Link from "next/link";
 
 export function NavUser({
   user,
@@ -105,6 +106,16 @@ export function NavUser({
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
 
+            <DropdownMenuItem>
+              <Link
+                href="/admin/account"
+                className="w-full flex gap-2 items-center"
+              >
+                <User />
+                Account
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleLogout}>
               <Button variant="outline" className="w-full">
                 {pending ? (

@@ -2,7 +2,7 @@
 
 import { getCurrentUser } from "@/helpers/getCurrentUser";
 import { db } from "@/lib/db";
-import { orders } from "@/lib/db/schema";
+import { orders, user } from "@/lib/db/schema";
 import { and, eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import z from "zod";
@@ -112,6 +112,13 @@ export async function wallet(
         updatedAt: new Date(),
       })
       .where(eq(orders.id, orderId));
+
+    await db
+      .update(user)
+      .set({
+        lastUpdatedAt: new Date(),
+      })
+      .where(eq(user.id, userId));
   } catch (error) {
     console.log("Error: ", error);
     return {

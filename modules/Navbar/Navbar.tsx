@@ -45,7 +45,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed w-full bg-gray-900 backdrop-blur-md py-2 border-b border-gray-800 text-white">
+    <nav className="sticky top-0 z-50 w-full bg-gray-900 backdrop-blur-md py-2 border-b border-gray-800 text-white">
       <div className="max-w-7xl w-full mx-auto flex items-center justify-between px-6 py-3">
         {/* Left: Logo */}
         <Link

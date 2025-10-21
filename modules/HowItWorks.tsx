@@ -55,7 +55,7 @@ export default function HowItWorks() {
             className="relative border border-gray-700 rounded-2xl bg-gray-800 hover:bg-gray-800/70 p06 transition-all duration-200">
             <div className="flex  items-start align-middle gap-4">
               <div className="flex">
-                <div className="p-3 pt-5 items-center justify-center bg-gray-900 rounded-xl shadow-inner">
+                <div className="p-3 mt-2 mx-2 items-center justify-center bg-gray-900 rounded-xl shadow-inner">
                   {step.icon}
                 </div>
                 <h2 className="font-bold pt-5 text-white">

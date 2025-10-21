@@ -2,7 +2,8 @@
 
 import { getCurrentUser } from "@/helpers/getCurrentUser";
 import { db } from "@/lib/db";
-import { orders } from "@/lib/db/schema";
+import { orders, user } from "@/lib/db/schema";
+import { eq } from "drizzle-orm";
 import { redirect, RedirectType } from "next/navigation";
 import z from "zod";
 
@@ -28,6 +29,7 @@ export async function newOrder(
   prevState: NewOrderFormState,
   formData: FormData
 ): Promise<NewOrderFormState> {
+  console.log("formdata: ", formData);
   const result = await getCurrentUser();
   if (!result.success)
     return {
@@ -89,6 +91,13 @@ export async function newOrder(
       .returning({ id: orders.id });
     console.log("orderid: ", order.id);
     orderId = order.id;
+
+    await db
+      .update(user)
+      .set({
+        lastUpdatedAt: new Date(),
+      })
+      .where(eq(user.id, userId));
   } catch (error) {
     console.log("Error: ", error);
     return {

@@ -28,6 +28,7 @@ export const user = pgTable("user", {
   banExpires: timestamp("ban_expires"),
   username: text("username").unique(),
   displayUsername: text("display_username"),
+  lastUpdatedAt: timestamp("last_updated_at").defaultNow(),
 });
 
 export const session = pgTable("session", {

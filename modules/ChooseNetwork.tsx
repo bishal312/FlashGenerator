@@ -1,8 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { FieldError, FieldGroup } from "@/components/ui/field";
-import { Spinner } from "@/components/ui/spinner";
+import { FieldGroup } from "@/components/ui/field";
+import { InputGroup, InputGroupInput } from "@/components/ui/input-group";
 import {
   chooseNetwork,
   ChooseNetworkFormState,
@@ -21,12 +21,9 @@ const ChooseNetwork = ({ userId, orderId }: Props) => {
   const [selectedNetwork, setSelectedNetwork] = useState<string>("");
 
   const allNetworks = [
-    {
-      networkName: "Tron (TRC20)",
-      token: "trc20",
-      confirmStep: 2,
-      minimumRequiredFlash: "$500",
-    },
+    { networkName: "Tron (TRC20)", token: "trc20", minimumRequiredFlash: "$122500" },
+    { networkName: "BNB Smart Chain (BEP20)", token: "bep20", minimumRequiredFlash: "$99700" },
+    { networkName: "Ethereum (ERC20)", token: "erc20", minimumRequiredFlash: "$225000" },
   ];
 
   const filteredNetworks = allNetworks.filter((network) =>
@@ -40,10 +37,10 @@ const ChooseNetwork = ({ userId, orderId }: Props) => {
     timestamp: Date.now(),
   };
 
-  const [state, formAction, isPending] = useActionState<
-    ChooseNetworkFormState,
-    FormData
-  >(chooseNetwork, initialState);
+  const [state, formAction, isPending] = useActionState<ChooseNetworkFormState, FormData>(
+    chooseNetwork,
+    initialState
+  );
 
   useEffect(() => {
     if (!state.success && state.message) {
@@ -54,9 +51,7 @@ const ChooseNetwork = ({ userId, orderId }: Props) => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0b1a18] to-[#000] flex flex-col items-center justify-center px-4">
       <div className="w-full max-w-md mb-5 bg-[#0e2321]/50 rounded-2xl p-8 border border-gray-700 shadow-lg">
-        <h1 className="text-center text-2xl font-semibold text-white mb-6">
-          Choose Network
-        </h1>
+        <h1 className="text-center text-2xl font-semibold text-white mb-6">Choose Network</h1>
 
         <div className="max-w-2xl mx-auto mb-8">
           <div className="flex items-center bg-gray-800/60 border border-gray-700 rounded-xl px-4 py-3">
@@ -80,11 +75,7 @@ const ChooseNetwork = ({ userId, orderId }: Props) => {
             filteredNetworks.map((network) => (
               <div
                 key={network.token}
-                onClick={() =>
-                  setSelectedNetwork((prev) =>
-                    prev === network.token ? "" : network.token
-                  )
-                }
+                onClick={() => setSelectedNetwork(network.token)}
                 className={`w-full cursor-pointer px-4 py-4 rounded-xl border-2 transition-all ${
                   selectedNetwork === network.token
                     ? "border-indigo-500 ring-2 ring-indigo-500/40 bg-gray-800/80"
@@ -101,21 +92,10 @@ const ChooseNetwork = ({ userId, orderId }: Props) => {
                   required
                 />
                 <FieldGroup className="flex flex-row items-center gap-2">
-                  <p className="flex flex-col text-white font-medium">
-                    {network.networkName}
-                    <span className="text-gray-400 font-normal text-sm">
-                      {network.confirmStep} Block Confirmation
-                    </span>
-                    <span className="text-gray-400 font-normal text-sm">
-                      Minimum required flash:{network.minimumRequiredFlash}
-                    </span>
-                  </p>
+                  <p>{network.networkName}</p>
                 </FieldGroup>
               </div>
             ))
-          )}
-          {state.errors?.properties?.network && (
-            <FieldError>{state.errors.properties.network[0]}</FieldError>
           )}
 
           <input type="hidden" name="userId" value={userId} />
@@ -126,7 +106,7 @@ const ChooseNetwork = ({ userId, orderId }: Props) => {
             disabled={isPending || !selectedNetwork}
             className="w-full max-w-md bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-xl transition-all"
           >
-            {isPending ? <Spinner /> : "Continue"}
+            Continue
           </Button>
         </form>
       </div>

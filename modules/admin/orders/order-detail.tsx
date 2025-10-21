@@ -117,7 +117,7 @@ const OrderDetailPage = ({ order }: Props) => {
                   )}
                 </button>
                 <button
-                  onClick={() => setNewStatus("accepted")}
+                  onClick={() => setNewStatus("success")}
                   disabled={isPending}
                   className="flex-1 flex items-center justify-center py-3 px-4 rounded-lg font-medium transition-all bg-green-50 text-green-700 hover:bg-green-100 border-2 border-green-200"
                 >

@@ -2,7 +2,7 @@
 
 import { getCurrentUser } from "@/helpers/getCurrentUser";
 import { db } from "@/lib/db";
-import { orders, systemSettings } from "@/lib/db/schema";
+import { orders, systemSettings, user } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 
@@ -89,6 +89,12 @@ export async function payment(
         updatedAt: new Date(),
       })
       .where(eq(orders.id, orderId));
+    await db
+      .update(user)
+      .set({
+        lastUpdatedAt: new Date(),
+      })
+      .where(eq(user.id, userId));
   } catch (error) {
     console.log("Error: ", error);
     return {

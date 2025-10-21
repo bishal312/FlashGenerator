@@ -106,36 +106,36 @@ export default function CustomImageUploader({
           <div
             className={cn(
               "relative flex flex-col items-center justify-center gap-2 px-6 py-8 rounded-lg border-2 border-dashed transition-all duration-200",
-              "border-gray-300 bg-gray-50/50 hover:border-emerald-400 hover:bg-emerald-50/50",
+              "border-gray-300 bg-gray-700/50 hover:border-gray-400 hover:bg-gray-500/50",
               isUploading && "cursor-not-allowed"
             )}
           >
             {isUploading ? (
               <>
-                <Loader2 className="h-8 w-8 text-emerald-600 animate-spin" />
+                <Loader2 className="h-8 w-8 text-gray-600 animate-spin" />
                 <span className="text-sm font-medium text-gray-700 mt-1">
                   Uploading...
                 </span>
               </>
             ) : (
               <>
-                <div className="p-2.5 bg-white rounded-lg border border-gray-200 group-hover:border-emerald-300 group-hover:bg-emerald-50 transition-all duration-200 shadow-sm">
-                  <div className="text-gray-600 group-hover:text-emerald-600 transition-colors">
+                <div className="p-2.5 bg-white rounded-lg border border-gray-200 group-hover:border-gray-300 group-hover:bg-emerald-50 transition-all duration-200 shadow-sm">
+                  <div className="text-gray-600 group-hover:text-gray-600 transition-colors">
                     {getIcon()}
                   </div>
                 </div>
                 <div className="text-center mt-1">
-                  <p className="text-sm font-medium text-gray-900">
+                  <p className="text-sm font-medium text-gray-50">
                     {imageUploadName}
                   </p>
-                  <p className="text-xs text-gray-500 mt-1">Click to upload</p>
+                  <p className="text-xs text-gray-100 mt-1">Click to upload</p>
                 </div>
               </>
             )}
           </div>
         </button>
       ) : (
-        <div className="w-full border border-emerald-200 bg-emerald-50/30 rounded-lg p-4 shadow-sm">
+        <div className="w-full border border-gray-200 bg-gray-500/30 rounded-lg p-4 shadow-sm">
           <div className="flex items-center gap-3">
             {/* Thumbnail */}
             <div className="flex-shrink-0">

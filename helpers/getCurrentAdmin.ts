@@ -2,11 +2,13 @@
 
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { user } from "@/lib/db/schema";
+import { user, UserSelectType } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
 
-type CurrentAdmin = { success: false; message: string } | { success: true };
+type CurrentAdmin =
+  | { success: false; message: string }
+  | { success: true; adminRecord: UserSelectType };
 
 export async function getCurrentAdmin(): Promise<CurrentAdmin> {
   const session = await auth.api.getSession({
@@ -38,5 +40,5 @@ export async function getCurrentAdmin(): Promise<CurrentAdmin> {
     };
   }
 
-  return { success: true };
+  return { success: true, adminRecord: userRecord };
 }

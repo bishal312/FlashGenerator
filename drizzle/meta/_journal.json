@@ -57,6 +57,13 @@
       "when": 1760947769742,
       "tag": "0007_flowery_shooting_star",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1760967960736,
+      "tag": "0008_legal_spencer_smythe",
+      "breakpoints": true
     }
   ]
 }
