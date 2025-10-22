@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -25,21 +25,25 @@ export default function Deposit() {
   const handleUpload = () => {
     if (!fileData) return alert("No image selected!");
     //fetch or axios
-    console.log("Image file ready to upload:", fileData);
-    router.push("/order-history/:orderid")
+    // console.log("Image file ready to upload:", fileData);
+    router.push("/order-history/:orderid");
   };
 
-  const handleTransactionIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTransactionIdChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const value = e.target.value;
     setTransactionId(value);
-  }
+  };
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0b1a18] to-[#000] flex flex-col items-center justify-center px-4">
       <div className="w-full max-w-md bg-[#0e2321]/60 border border-gray-700 rounded-2xl p-8  shadow-lg text-center space-y-6">
         <h1 className="text-2xl font-semibold text-white">Verify Payment</h1>
         <div className="flex flex-col gap-5">
           <div>
-            <h2 className="text-white font-semibold text-left pb-2">Transaction / Order ID *</h2>
+            <h2 className="text-white font-semibold text-left pb-2">
+              Transaction / Order ID *
+            </h2>
             <input
               type="number"
               value={transactionId}
@@ -49,7 +53,9 @@ export default function Deposit() {
             />
           </div>
           <div>
-            <h2 className="text-white font-semibold text-left pb-2">Payment Screenshoot</h2>
+            <h2 className="text-white font-semibold text-left pb-2">
+              Payment Screenshoot
+            </h2>
             <input
               type="file"
               accept="imgae/*"

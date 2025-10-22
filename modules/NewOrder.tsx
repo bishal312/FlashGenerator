@@ -12,9 +12,6 @@ export default function NewOrder() {
       alert("Please Select Coin before continuing.");
       return;
     }
-    console.log({
-      selectedCoin,
-    });
   };
 
   return (
@@ -28,10 +25,11 @@ export default function NewOrder() {
             Select Coin
           </label>
           <div
-            className={`flex items-center justify-between bg-gray-900 hover:bg-gray-800 rounded-xl p-3 cursor-pointer border transition-all duration-200 ${selectedCoin === "USDT"
-              ? "border-indigo-500 ring-2 ring-indigo-500/40"
-              : "border-gray-700"
-              }`}
+            className={`flex items-center justify-between bg-gray-900 hover:bg-gray-800 rounded-xl p-3 cursor-pointer border transition-all duration-200 ${
+              selectedCoin === "USDT"
+                ? "border-indigo-500 ring-2 ring-indigo-500/40"
+                : "border-gray-700"
+            }`}
             onClick={() => {
               setSelectedCoin((prev) => (prev === "USDT" ? "" : "USDT"));
             }}

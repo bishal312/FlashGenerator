@@ -145,6 +145,7 @@ export default function CustomImageUploader({
                   alt={imageUploadName || "Uploaded document"}
                   width={64}
                   height={64}
+                  unoptimized
                   className="object-cover"
                 />
               </div>

@@ -45,7 +45,7 @@ const Deposit = ({ userId, orderId }: Props) => {
   }, [transactionId]);
 
   return (
-    <div className="min-h-screen w-full flex justify-center items-center bg-gradient-to-b from-[#061b19] to-black px-4">
+    <div className="min-h-screen w-full flex justify-center items-center bg-gradient-to-b from-[#061b19] to-black px-4 mt-16">
       <div className="flex flex-col gap-8 bg-[#111111] border border-gray-800 shadow-lg shadow-black/40 py-8 px-7 rounded-2xl max-w-2xl w-full">
         <h1 className="text-2xl font-bold text-gray-100 tracking-wide text-center">
           Verify Payment

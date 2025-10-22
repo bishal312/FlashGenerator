@@ -58,7 +58,6 @@ const OrderDetailPage = ({ order }: Props) => {
       toast.error(state.message, { position: "top-right" });
     }
   }, [state.success, state.message, state.timestamp, router]);
-  console.log("imageurl: ", order.paymentProofUrl);
   return (
     <div className="min-h-screen bg-gray-50 p-4 sm:p-6">
       <div className="max-w-4xl mx-auto">
@@ -202,7 +201,8 @@ const OrderDetailPage = ({ order }: Props) => {
             </h2>
             <div className="relative w-full aspect-[4/3] sm:aspect-video max-w-2xl mx-auto rounded-lg overflow-hidden border-2 border-gray-200">
               <Image
-                loading="eager"
+                loading="lazy"
+                unoptimized
                 src={order.paymentProofUrl}
                 alt="Payment Proof"
                 fill

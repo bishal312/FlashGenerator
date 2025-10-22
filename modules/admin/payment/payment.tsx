@@ -52,17 +52,16 @@ const Payment = ({
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-b from-[#061b19] to-black px-4">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-b from-[#061b19] to-black px-4 mt-16">
       <div className="bg-[#111111] border border-gray-800 py-8 px-6 max-w-2xl rounded-2xl flex flex-col items-center gap-6 w-full shadow-lg shadow-black/40">
-        {/* Title */}
         <h1 className="text-2xl font-bold text-gray-100 tracking-wide">
           Payment
         </h1>
 
-        {/* QR Code */}
         <div className="w-44 h-44 relative border border-gray-700 rounded-lg overflow-hidden">
           <Image
-            loading="eager"
+            loading="lazy"
+            unoptimized
             src={depositQrCodeUrl || "/images/qr.jpeg"}
             alt="qrcode"
             fill
@@ -70,7 +69,6 @@ const Payment = ({
           />
         </div>
 
-        {/* Payment Form */}
         <div className="w-full">
           <form action={formAction} className="flex flex-col gap-4">
             <Field>
@@ -83,7 +81,6 @@ const Payment = ({
               />
             </Field>
 
-            {/* Deposit Address with Copy Icon */}
             <Field>
               <FieldLabel className="text-gray-300">Deposit Address</FieldLabel>
               <div className="flex items-center justify-between bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 gap-2">

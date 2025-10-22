@@ -56,10 +56,10 @@ export default function LoginPage() {
               id="username"
               type="text"
               defaultValue={state.inputs?.username}
-              className="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:ring-2 focus:ring-indigo-500 outline-none text-white placeholder:text-gray-400 autofill:text-white autofill:bg-gray-800"
+              className="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:ring-2 focus:ring-indigo-500 outline-none text-white !placeholder:text-red-500 autofill:text-white 
+              "
               style={{
                 colorScheme: "dark",
-                WebkitTextFillColor: "white",
               }}
               placeholder="Enter your telegram username"
               required
