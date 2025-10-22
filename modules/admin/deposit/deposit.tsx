@@ -47,14 +47,11 @@ const Deposit = ({ userId, orderId }: Props) => {
   return (
     <div className="min-h-screen w-full flex justify-center items-center bg-gradient-to-b from-[#061b19] to-black px-4">
       <div className="flex flex-col gap-8 bg-[#111111] border border-gray-800 shadow-lg shadow-black/40 py-8 px-7 rounded-2xl max-w-2xl w-full">
-        {/* Title */}
         <h1 className="text-2xl font-bold text-gray-100 tracking-wide text-center">
           Verify Payment
         </h1>
 
-        {/* Form */}
         <form action={formAction} className="flex flex-col gap-6">
-          {/* Transaction ID */}
           <Field>
             <FieldLabel htmlFor="transactionId" className="text-gray-300">
               Transaction / Order ID *
@@ -90,7 +87,6 @@ const Deposit = ({ userId, orderId }: Props) => {
             )}
           </Field>
 
-          {/* Upload Screenshot */}
           <Field className="flex flex-col gap-3">
             <FieldLabel
               htmlFor="paymentScreenshotUrl"
@@ -111,7 +107,6 @@ const Deposit = ({ userId, orderId }: Props) => {
             )}
           </Field>
 
-          {/* Hidden Inputs */}
           <input type="hidden" name="userId" value={userId} required />
           <input type="hidden" name="orderId" value={orderId} required />
           <input
@@ -121,7 +116,6 @@ const Deposit = ({ userId, orderId }: Props) => {
             required
           />
 
-          {/* Submit Button */}
           <Button
             type="submit"
             disabled={isPending || transactionLengthError}

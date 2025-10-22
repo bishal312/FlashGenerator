@@ -1,1 +1,0 @@
-ALTER TABLE "system_settings" ADD COLUMN "conversion_rate" text;

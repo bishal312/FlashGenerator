@@ -75,6 +75,9 @@ export default function Navbar() {
           >
             How It Works
           </Link>
+          <Link href="/contact-us" className="hover:text-indigo-400 transition">
+            Contact us
+          </Link>
         </div>
 
         {/* Right: Profile / Dropdown */}

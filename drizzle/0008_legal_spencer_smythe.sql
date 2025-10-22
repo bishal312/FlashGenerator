@@ -1,1 +1,0 @@
-ALTER TABLE "user" ADD COLUMN "last_updated_at" timestamp DEFAULT now();

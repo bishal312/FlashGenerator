@@ -127,6 +127,7 @@ export const systemSettings = pgTable("system_settings", {
     .primaryKey()
     .$default(() => "system"),
   depositAddress: text("deposit_address").notNull(),
+  supportUsername: text("support_username"),
   depositQrCodeUrl: text("deposit_qr_code_url").notNull(),
   conversionRate: numeric("conversion_rate", { mode: "number" }).notNull(),
   updatedAt: timestamp("updated_at").defaultNow(),

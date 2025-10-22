@@ -5,64 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1760625977800,
-      "tag": "0000_round_tigra",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1760690704880,
-      "tag": "0001_public_doomsday",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1760778449174,
-      "tag": "0002_sharp_bill_hollister",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1760798804320,
-      "tag": "0003_short_the_twelve",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1760882099694,
-      "tag": "0004_quiet_talkback",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "7",
-      "when": 1760884430241,
-      "tag": "0005_perpetual_terrax",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "7",
-      "when": 1760947596473,
-      "tag": "0006_cool_mariko_yashida",
-      "breakpoints": true
-    },
-    {
-      "idx": 7,
-      "version": "7",
-      "when": 1760947769742,
-      "tag": "0007_flowery_shooting_star",
-      "breakpoints": true
-    },
-    {
-      "idx": 8,
-      "version": "7",
-      "when": 1760967960736,
-      "tag": "0008_legal_spencer_smythe",
+      "when": 1761147585133,
+      "tag": "0000_panoramic_expediter",
       "breakpoints": true
     }
   ]

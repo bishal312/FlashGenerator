@@ -25,7 +25,7 @@ const ChooseNetwork = ({ userId, orderId }: Props) => {
       networkName: "Tron (TRC20)",
       token: "trc20",
       confirmStep: 2,
-      minimumRequiredFlash: "$500",
+      minimumRequiredFlash: "$5000",
     },
   ];
 

@@ -116,6 +116,7 @@ const UpdateDepositInfo = ({ systemRecord }: Props) => {
               </label>
               <div className="relative w-40 h-40 border-2 border-gray-200 rounded-lg overflow-hidden">
                 <Image
+                  loading="eager"
                   src={systemRecord.depositQrCodeUrl}
                   fill
                   alt="QR CODE"

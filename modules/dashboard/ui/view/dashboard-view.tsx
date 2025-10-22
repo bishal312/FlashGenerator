@@ -13,6 +13,7 @@ import {
   CheckCircle2,
   XCircle,
   Loader2,
+  ContactRound,
 } from "lucide-react";
 import Link from "next/link";
 import { OrderSelectType, UserSelectType } from "@/lib/db/schema";
@@ -208,6 +209,12 @@ const DashboardView = ({ userRecord, total, latestOrder }: Props) => {
                 href: "/faq",
                 label: "Frequently Asked Questions",
                 icon: <HelpCircle className="w-5 h-5 text-gray-300" />,
+              },
+              {
+                color: "green",
+                href: "/contact-us",
+                label: "Contact Us",
+                icon: <ContactRound className="w-5 h-5 text-gray-300" />,
               },
             ].map((item, idx) => (
               <Link

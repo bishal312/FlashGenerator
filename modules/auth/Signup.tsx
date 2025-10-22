@@ -75,6 +75,10 @@ export default function SignupPage() {
               placeholder="Enter your telegram username"
               defaultValue={state.inputs?.username}
               required
+              style={{
+                colorScheme: "dark",
+                WebkitTextFillColor: "white",
+              }}
             />
             {state.errors?.properties?.username && (
               <FieldError>{state.errors.properties.username[0]}</FieldError>
@@ -91,8 +95,11 @@ export default function SignupPage() {
               className="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:ring-2 focus:ring-indigo-500 outline-none"
               name="email"
               defaultValue={state.inputs?.email}
-              placeholder="m@example.com"
               required
+              style={{
+                colorScheme: "dark",
+                WebkitTextFillColor: "white",
+              }}
             />
             {state.errors?.properties?.email && (
               <FieldError>{state.errors.properties.email[0]}</FieldError>
@@ -104,13 +111,16 @@ export default function SignupPage() {
             </FieldLabel>
             <InputGroup className=" px-1 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:ring-2 focus:ring-indigo-500 outline-none">
               <InputGroupInput
+                required
                 id="password"
                 name="password"
-                placeholder="••••••••"
                 defaultValue={state.inputs?.password}
                 type={inputType}
                 onChange={(e) => setPassword(e.target.value)}
-                required
+                style={{
+                  colorScheme: "dark",
+                  WebkitTextFillColor: "white",
+                }}
               />
               <InputGroupAddon align="inline-end" className="cursor-default">
                 {inputType === "password" ? (
@@ -137,10 +147,13 @@ export default function SignupPage() {
               <InputGroupInput
                 id="confirmPassword"
                 name="confirmPassword"
-                placeholder="••••••••"
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 type={inputType}
                 defaultValue={state.inputs?.confirmPassword}
+                style={{
+                  colorScheme: "dark",
+                  WebkitTextFillColor: "white",
+                }}
                 required
               />
               <InputGroupAddon align="inline-end" className="cursor-default">

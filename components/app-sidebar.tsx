@@ -3,6 +3,7 @@
 import * as React from "react";
 import {
   BookAIcon,
+  Contact2Icon,
   GalleryVerticalEnd,
   PenIcon,
   ShoppingBasket,
@@ -52,6 +53,12 @@ const data = {
       title: "Orders",
       url: "/admin/orders",
       icon: ShoppingBasket,
+      isActive: true,
+    },
+    {
+      title: "Update Contact",
+      url: "/admin/update-contact-info",
+      icon: Contact2Icon,
       isActive: true,
     },
   ],
