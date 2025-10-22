@@ -1,4 +1,3 @@
-import { requireUser } from "@/helpers/requireUser";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { orders, user } from "@/lib/db/schema";
@@ -35,7 +34,11 @@ const Page = async ({ params }: Props) => {
     redirect("/new-order");
   }
 
-  return <ChooseNetwork userId={userRecord.id} orderId={orderRecord.id} />;
+  return (
+    <>
+      <ChooseNetwork userId={userRecord.id} orderId={orderRecord.id} />
+    </>
+  );
 };
 
 export default Page;

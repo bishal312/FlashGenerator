@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { Globe, Code2, CheckCircle2, Wallet, AlertCircle } from "lucide-react"
+import { Globe, Code2, CheckCircle2, Wallet, AlertCircle } from "lucide-react";
 
 export default function HowItWorks() {
   const steps = [
@@ -42,17 +42,20 @@ export default function HowItWorks() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white px-6 sm:px-8 md:px-10 lg:py-20 py-16">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white px-6 sm:px-8 md:px-10 lg:py-20 mt-16">
       <h1 className="text-3xl md:text-4xl font-bold text-center pb-2 mt-10">
         How It Works
       </h1>
       <p className="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
-        Understand the simple and secure process behind our Web3 Flash Generation System.
+        Understand the simple and secure process behind our Web3 Flash
+        Generation System.
       </p>
       <div className="max-w-3xl mx-auto space-y-6">
         {steps.map((step, index) => (
-          <div key={index}
-            className="relative border border-gray-700 rounded-2xl bg-gray-800 hover:bg-gray-800/70 p06 transition-all duration-200">
+          <div
+            key={index}
+            className="relative border border-gray-700 rounded-2xl bg-gray-800 hover:bg-gray-800/70 p06 transition-all duration-200"
+          >
             <div className="flex  items-start align-middle gap-4">
               <div className="flex">
                 <div className="p-3 mt-2 mx-2 items-center justify-center bg-gray-900 rounded-xl shadow-inner">
@@ -63,12 +66,12 @@ export default function HowItWorks() {
                 </h2>
               </div>
             </div>
-                <p className="text-gray-300 px-5 pb-5 mt-2 text-sm">
-                  {step.description}
-                </p>
+            <p className="text-gray-300 px-5 pb-5 mt-2 text-sm">
+              {step.description}
+            </p>
           </div>
         ))}
       </div>
     </div>
-  )
+  );
 }

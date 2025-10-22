@@ -1,5 +1,4 @@
 import { auth } from "@/lib/auth";
-import Navbar from "@/modules/Navbar/Navbar";
 import SupportedPlatform from "@/modules/SupportedPlatform";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
@@ -12,7 +11,6 @@ const page = async () => {
   if (!session) redirect("/sign-in");
   return (
     <>
-      <Navbar />
       <SupportedPlatform />
     </>
   );

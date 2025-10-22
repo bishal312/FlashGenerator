@@ -56,8 +56,12 @@ export default function LoginPage() {
               id="username"
               type="text"
               defaultValue={state.inputs?.username}
-              className="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:ring-2 focus:ring-indigo-500 outline-none"
-              placeholder="Enter your telegaram username"
+              className="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:ring-2 focus:ring-indigo-500 outline-none text-white placeholder:text-gray-400 autofill:text-white autofill:bg-gray-800"
+              style={{
+                colorScheme: "dark",
+                WebkitTextFillColor: "white",
+              }}
+              placeholder="Enter your telegram username"
               required
             />
             {state.errors?.properties?.username && (
@@ -66,23 +70,32 @@ export default function LoginPage() {
           </Field>
 
           <Field>
-            <FieldLabel htmlFor="passsword" className="block text-sm mb-1">
+            <FieldLabel htmlFor="password" className="block text-sm mb-1">
               Password
             </FieldLabel>
-            <InputGroup className=" px-1 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:ring-2 focus:ring-indigo-500 outline-none">
+            <InputGroup className="px-1 py-2 rounded-lg bg-gray-800 border border-gray-700 focus-within:ring-2 focus-within:ring-indigo-500">
               <InputGroupInput
                 id="password"
                 name="password"
-                placeholder="••••••••"
                 defaultValue={state.inputs?.password}
                 type={inputType}
-                className="text-gray-200"
+                className="text-white placeholder:text-gray-400 bg-transparent"
+                style={{
+                  colorScheme: "dark",
+                  WebkitTextFillColor: "white",
+                }}
               />
-              <InputGroupAddon align="inline-end" className="cursor-default">
+              <InputGroupAddon align="inline-end" className="cursor-pointer">
                 {inputType === "password" ? (
-                  <EyeOff onClick={() => setInputType("text")} />
+                  <EyeOff
+                    onClick={() => setInputType("text")}
+                    className="text-gray-400 hover:text-white transition"
+                  />
                 ) : (
-                  <Eye onClick={() => setInputType("password")} />
+                  <Eye
+                    onClick={() => setInputType("password")}
+                    className="text-gray-400 hover:text-white transition"
+                  />
                 )}
               </InputGroupAddon>
             </InputGroup>
@@ -92,7 +105,7 @@ export default function LoginPage() {
           </Field>
 
           <p className="text-sm text-gray-400 text-center">
-            Don’t have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link href="/sign-up" className="text-indigo-400 hover:underline">
               Sign Up
             </Link>
@@ -111,7 +124,7 @@ export default function LoginPage() {
                 className="w-full py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 transition font-semibold"
               >
                 <Spinner />
-                Signing up...
+                Signing in...
               </Button>
             </div>
           )}

@@ -52,7 +52,7 @@ const ChooseNetwork = ({ userId, orderId }: Props) => {
   }, [state.success, state.message, state.timestamp]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0b1a18] to-[#000] flex flex-col items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-b from-[#0b1a18] to-[#000] flex flex-col items-center justify-center px-4 mt-16">
       <div className="w-full max-w-md mb-5 bg-[#0e2321]/50 rounded-2xl p-8 border border-gray-700 shadow-lg">
         <h1 className="text-center text-2xl font-semibold text-white mb-6">
           Choose Network

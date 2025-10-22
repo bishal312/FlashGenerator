@@ -4,7 +4,6 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { OrderSelectType, user } from "@/lib/db/schema";
 import DashboardView from "@/modules/dashboard/ui/view/dashboard-view";
-import Navbar from "@/modules/Navbar/Navbar";
 import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
@@ -43,7 +42,6 @@ const page = async () => {
 
   return (
     <>
-      <Navbar />
       <DashboardView
         userRecord={userRecord}
         total={{

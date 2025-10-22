@@ -20,7 +20,11 @@ const Page = async () => {
     await auth.api.signOut({ headers: await headers() });
   }
   if (userRecord.role !== "user") return redirect("/dashboard");
-  return <NewOrder userId={userRecord.id} />;
+  return (
+    <>
+      <NewOrder userId={userRecord.id} />)
+    </>
+  );
 };
 
 export default Page;

@@ -2,7 +2,6 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { orders, user } from "@/lib/db/schema";
 import Wallet from "@/modules/admin/wallet-address/wallet";
-import Navbar from "@/modules/Navbar/Navbar";
 import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
@@ -36,7 +35,6 @@ const Page = async ({ params }: Props) => {
   }
   return (
     <>
-      <Navbar />
       <Wallet
         userId={userRecord.id}
         orderId={orderRecord.id}

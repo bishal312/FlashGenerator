@@ -45,14 +45,20 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-gray-900 backdrop-blur-md py-2 border-b border-gray-800 text-white">
-      <div className="max-w-7xl w-full mx-auto flex items-center justify-between px-6 py-3">
+    <nav className="fixed top-0 left-0 right-0 z-50 w-full bg-gray-900/95 backdrop-blur-md border-b border-gray-800 text-white">
+      <div className="max-w-7xl w-full mx-auto flex items-center justify-between px-4 sm:px-6 py-4">
         {/* Left: Logo */}
         <Link
           href="/dashboard"
-          className="text-xl font-bold text-indigo-400 hover:text-indigo-300"
+          className="flex flex-col hover:opacity-90 transition group"
         >
-          ⚡ FlashGen
+          <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            Make Million
+          </span>
+          <span className="text-[10px] sm:text-xs text-gray-400 -mt-1 tracking-wide">
+            powered by{" "}
+            <span className="text-indigo-400 font-medium">flashgenz</span>
+          </span>
         </Link>
 
         {/* Center: Nav Links */}
@@ -89,7 +95,8 @@ export default function Navbar() {
                   className="flex items-center w-full px-4 py-2 text-sm hover:bg-gray-700 transition"
                   disabled={pending}
                 >
-                  <LogOut size={16} className="mr-2" /> Logout
+                  <LogOut size={16} className="mr-2" />
+                  Logout
                 </button>
               ) : (
                 <div className="flex flex-col items-center gap-4">

@@ -43,7 +43,7 @@ const SelectAmount = ({ userId, orderId, conversionRate }: Props) => {
   }, [state.success, state.message, state.timestamp]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#061b19] to-black flex flex-col items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-b from-[#061b19] to-black flex flex-col items-center justify-center px-4 mt-10">
       <div className="w-full max-w-md space-y-6">
         <h2 className="text-center text-gray-100 text-lg font-semibold">
           Select Amount

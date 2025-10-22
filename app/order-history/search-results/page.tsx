@@ -36,7 +36,6 @@ const page = async () => {
 
   return (
     <>
-      <Navbar />
       <OrderHistory allOrders={allOrders} from="search-results" />
     </>
   );

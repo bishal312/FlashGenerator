@@ -2,7 +2,6 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { orders, systemSettings, user } from "@/lib/db/schema";
 import SelectAmount from "@/modules/admin/select-amount/select-amount";
-import Navbar from "@/modules/Navbar/Navbar";
 import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
@@ -40,7 +39,6 @@ const Page = async ({ params }: Props) => {
     .where(eq(systemSettings.id, "system"));
   return (
     <>
-      <Navbar />
       <SelectAmount
         userId={userRecord.id}
         orderId={orderRecord.id}

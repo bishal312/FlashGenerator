@@ -62,6 +62,7 @@ const Payment = ({
         {/* QR Code */}
         <div className="w-44 h-44 relative border border-gray-700 rounded-lg overflow-hidden">
           <Image
+            loading="eager"
             src={depositQrCodeUrl || "/images/qr.jpeg"}
             alt="qrcode"
             fill

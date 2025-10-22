@@ -1,9 +1,8 @@
 import { getCurrentUser } from "@/helpers/getCurrentUser";
 import { db } from "@/lib/db";
 import { orders } from "@/lib/db/schema";
-import Navbar from "@/modules/Navbar/Navbar";
 import OrderHistory from "@/modules/OrderHistroy";
-import { desc } from "drizzle-orm";
+import { and, desc, isNotNull, ne } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import React from "react";
 
@@ -14,14 +13,24 @@ const page = async () => {
   const userId = result.user.id;
 
   const allOrders = await db.query.orders.findMany({
-    where: (fields, { eq }) => eq(orders.userId, userId),
+    where: (fields, { eq }) =>
+      and(
+        eq(orders.userId, userId),
+        isNotNull(orders.walletAddress),
+        ne(orders.walletAddress, ""),
+        isNotNull(orders.txId),
+        ne(orders.txId, ""),
+        isNotNull(orders.telegramName),
+        ne(orders.telegramName, ""),
+        ne(orders.depositAddress, ""),
+        ne(orders.depositQrCodeUrl, "")
+      ),
     orderBy: desc(orders.createdAt),
   });
 
   return (
     <>
-      <Navbar />
-      <OrderHistory allOrders={allOrders ?? []} />
+      <OrderHistory allOrders={allOrders ?? []} from="order-history" />
     </>
   );
 };

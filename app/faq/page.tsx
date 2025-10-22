@@ -1,7 +1,8 @@
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { faqs } from "@/lib/db/schema";
 import Faq from "@/modules/Faq";
-import Navbar from "@/modules/Navbar/Navbar";
+import { desc } from "drizzle-orm";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import React from "react";
@@ -13,10 +14,11 @@ const page = async () => {
   if (!session) {
     redirect("/sign-in");
   }
-  const allFaqs = await db.query.faqs.findMany();
+  const allFaqs = await db.query.faqs.findMany({
+    orderBy: desc(faqs.createdAt),
+  });
   return (
     <>
-      <Navbar />
       <Faq allFaqs={allFaqs} />
     </>
   );

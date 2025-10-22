@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 export default function FlashGenWarning() {
   const flashWarnings = [
@@ -52,19 +52,16 @@ export default function FlashGenWarning() {
     },
   ];
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white px-6 sm:px-8 mt-19 pb-5">
-      <h1 className="text-3xl font-bold text-center mb-10">
-        Supported Platforms
-      </h1>
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white px-6 sm:px-8 py-5 pb-5 mt-16">
+      <h1 className="text-3xl font-bold text-center mb-10">Important Notice</h1>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
         {flashWarnings.map((warning, idx) => (
           <div
             key={idx}
-            className="bg-gray-900/60 border border-gray-700 rounded-2xl p-6 hover:border-indigo-500/50 hover:shadow-lg hover: shadow-indigo-500/10 transition-all duration-300">
+            className="bg-gray-900/60 border border-gray-700 rounded-2xl p-6 hover:border-indigo-500/50 hover:shadow-lg hover: shadow-indigo-500/10 transition-all duration-300"
+          >
             <h2 className="text-lg font-semibold text-red-400 mb-4">
-              {idx + 1}
-              .
-              {" " + warning.title}
+              {idx + 1}.{" " + warning.title}
             </h2>
             <p className="text-gray-300 mt-2 text-sm">{warning.description}</p>
             <div className="text-gray-300 mt-2 text-sm">
