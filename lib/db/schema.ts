@@ -100,9 +100,7 @@ export const orders = pgTable("orders", {
   network: orderNetworkEnum("network"),
 
   walletAddress: text("wallet_address"),
-  telegramName: text("telegram_name").references(() => user.username, {
-    onDelete: "cascade",
-  }),
+  telegramName: text("telegram_name"),
 
   fromAmount: numeric("from_amount", { mode: "number" }),
   toAmount: numeric("to_amount", { mode: "number" }),

@@ -88,7 +88,7 @@ export async function selectAmount(
   }
 
   const { fromAmount, toAmount, conversionRate } = validateFields.data;
-  if (fromAmount < 50 || toAmount < 500) {
+  if (fromAmount < 500 || toAmount < 5000) {
     return {
       success: false,
       message: "Minimum balance is not met",

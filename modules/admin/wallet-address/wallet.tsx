@@ -84,12 +84,7 @@ const Wallet = ({ userId, orderId, username }: Props) => {
             <FieldLabel className="block text-sm font-medium text-gray-400 mt-4">
               Telegram username
             </FieldLabel>
-            <Input
-              disabled
-              value={username}
-              name="username"
-              className="text-white"
-            />
+            <Input disabled value={username} className="text-white" />
           </Field>
           <input type="hidden" name="userId" value={userId} />
           <input type="hidden" name="orderId" value={orderId} />
