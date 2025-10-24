@@ -118,10 +118,10 @@ export async function signUp(
   try {
     await auth.api.signUpEmail({
       body: {
-        name: username,
+        name: username.toLowerCase(),
         email,
         password,
-        username,
+        username: username.toLowerCase(),
         displayUsername: username,
       },
     });

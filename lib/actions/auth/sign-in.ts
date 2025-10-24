@@ -72,7 +72,11 @@ export async function signIn(
     const [userRecord] = await db
       .select()
       .from(user)
-      .where(eq(user.username, username));
+      .where(eq(user.username, username.toLowerCase()));
+
+    console.log("username frm form: ", username);
+    console.log("lowercased username from form: ", username.toLowerCase());
+    console.log("usernmae from db: ", userRecord.username);
 
     if (userRecord.role === "admin") return redirect("/admin");
 
