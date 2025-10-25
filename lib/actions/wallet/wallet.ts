@@ -55,7 +55,7 @@ export async function wallet(
     };
   }
 
-  if (username !== result.user.name) {
+  if (username.toLowerCase() !== result.user.username) {
     return {
       success: false,
       message: "Unauthorized attempt",
@@ -108,7 +108,7 @@ export async function wallet(
       .update(orders)
       .set({
         walletAddress,
-        telegramName: username,
+        telegramName: username.toLowerCase(),
         updatedAt: new Date(),
       })
       .where(eq(orders.id, orderId));

@@ -38,7 +38,7 @@ const Page = async ({ params }: Props) => {
       <Wallet
         userId={userRecord.id}
         orderId={orderRecord.id}
-        username={userRecord.name}
+        username={userRecord.username || userRecord.name.toLowerCase()}
       />
     </>
   );

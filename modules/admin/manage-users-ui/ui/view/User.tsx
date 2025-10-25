@@ -73,40 +73,44 @@ const User = ({ user }: Props) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-gray-50 p-4 sm:p-6">
       <div className="max-w-3xl mx-auto">
-        <div className="mb-6">
+        <div className="mb-4 sm:mb-6">
           <Link
             href="/admin/manage-users"
             className="text-blue-600 hover:text-blue-700 text-sm font-medium mb-2 inline-block"
           >
             ← Back to Users
           </Link>
-          <h1 className="text-3xl font-bold text-gray-900">Update User</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
+            Update User
+          </h1>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6 mb-6">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-16 h-16 flex-shrink-0 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-md">
+        <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6">
+          <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 flex-shrink-0 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl sm:text-2xl shadow-md">
               {user.username?.charAt(0).toUpperCase() ||
                 user.email?.charAt(0).toUpperCase()}
             </div>
             <div className="flex-1 min-w-0">
-              <h2 className="text-2xl font-semibold text-gray-900 truncate">
+              <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 truncate">
                 {user.username || "No username"}
               </h2>
-              <p className="text-gray-600 truncate">
+              <p className="text-sm sm:text-base text-gray-600 truncate">
                 {user.email || "No email"}
               </p>
             </div>
           </div>
 
           <div className="space-y-3 pt-4 border-t border-gray-100">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-0">
               <span className="text-sm text-gray-600">User ID:</span>
-              <span className="text-sm font-mono text-gray-900">{user.id}</span>
+              <span className="text-sm font-mono text-gray-900 break-all">
+                {user.id}
+              </span>
             </div>
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-0">
               <span className="text-sm text-gray-600">Created:</span>
               <span className="text-sm text-gray-900">
                 {user.createdAt?.toLocaleDateString() || "N/A"}
@@ -115,9 +119,9 @@ const User = ({ user }: Props) => {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
-          <div className="flex items-center justify-between mb-4">
-            <div>
+        <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 sm:p-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-4">
+            <div className="min-w-0 flex-1">
               <h3 className="text-lg font-semibold text-gray-900">
                 Password Management
               </h3>
@@ -126,7 +130,10 @@ const User = ({ user }: Props) => {
               </p>
             </div>
             {!showUpdatePassword ? (
-              <Button onClick={() => setShowUpdatePassword(true)}>
+              <Button
+                onClick={() => setShowUpdatePassword(true)}
+                className="w-full sm:w-auto whitespace-nowrap"
+              >
                 Update Password
               </Button>
             ) : (
@@ -138,6 +145,7 @@ const User = ({ user }: Props) => {
                 }}
                 disabled={isPending}
                 variant="outline"
+                className="w-full sm:w-auto"
               >
                 Cancel
               </Button>

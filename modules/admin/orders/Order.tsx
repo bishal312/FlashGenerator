@@ -42,20 +42,20 @@ const Order = ({ allOrders }: Props) => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 sm:p-6">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-gray-50 p-4 sm:p-6 w-full overflow-x-hidden">
+      <div className="max-w-7xl mx-auto w-full">
         <h1 className="text-2xl font-bold text-gray-900 mb-6">Orders</h1>
 
-        <div className="mb-6 border-b border-gray-200 overflow-x-auto">
+        <div className="mb-6 border-b border-gray-200 -mx-4 sm:mx-0 px-4 sm:px-0 overflow-x-auto">
           <nav
-            className="flex space-x-2 sm:space-x-4 min-w-max sm:min-w-0"
+            className="flex space-x-2 sm:space-x-4 min-w-max pb-px"
             aria-label="Tabs"
           >
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as typeof activeTab)}
-                className={`whitespace-nowrap py-3 px-4 sm:px-6 border-b-2 font-medium text-sm transition-colors ${
+                className={`whitespace-nowrap py-3 px-3 sm:px-6 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === tab.id
                     ? "border-blue-600 text-blue-600"
                     : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
@@ -81,15 +81,15 @@ const Order = ({ allOrders }: Props) => {
             <p className="text-gray-500 text-lg">No {activeTab} orders found</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
             {filteredOrders.map((order) => (
               <div
                 key={order.id}
-                className="bg-white rounded-lg shadow-md p-5 border border-gray-200 hover:shadow-lg transition-shadow"
+                className="bg-white rounded-lg shadow-md p-4 sm:p-5 border border-gray-200 hover:shadow-lg transition-shadow w-full min-w-0"
               >
-                <div className="flex justify-between items-start mb-3">
-                  <div className="min-w-0 flex-1">
-                    <h3 className="font-semibold text-gray-900 text-lg truncate">
+                <div className="flex justify-between items-start mb-3 gap-2">
+                  <div className="min-w-0 flex-1 overflow-hidden">
+                    <h3 className="font-semibold text-gray-900 text-base sm:text-lg truncate">
                       {order.user.name}
                     </h3>
                     <p className="text-sm text-gray-500 truncate">
@@ -97,13 +97,13 @@ const Order = ({ allOrders }: Props) => {
                     </p>
                   </div>
                   <span
-                    className={`px-3 py-1 rounded-full text-xs font-medium ml-2 flex-shrink-0 ${
+                    className={`px-2 sm:px-3 py-1 rounded-full text-xs font-medium flex-shrink-0 ${
                       order.status === "success"
                         ? "bg-green-100 text-green-800"
                         : order.status === "pending"
                         ? "bg-yellow-100 text-yellow-800"
                         : order.status === "rejected"
-                        ? "bg-red-100 text-red-800 border-red-200"
+                        ? "bg-red-100 text-red-800"
                         : "bg-gray-100 text-gray-800"
                     }`}
                   >
@@ -111,15 +111,17 @@ const Order = ({ allOrders }: Props) => {
                   </span>
                 </div>
                 <div className="space-y-2 mb-4">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Amount:</span>
-                    <span className="font-medium text-gray-900">
+                  <div className="flex justify-between text-sm gap-2">
+                    <span className="text-gray-600 flex-shrink-0">Amount:</span>
+                    <span className="font-medium text-gray-900 text-right truncate">
                       ${order.toAmount}
                     </span>
                   </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Deposit:</span>
-                    <span className="font-medium text-gray-900">
+                  <div className="flex justify-between text-sm gap-2">
+                    <span className="text-gray-600 flex-shrink-0">
+                      Deposit:
+                    </span>
+                    <span className="font-medium text-gray-900 text-right truncate">
                       {order.fromAmount} TRC
                     </span>
                   </div>
@@ -129,7 +131,7 @@ const Order = ({ allOrders }: Props) => {
                 </div>
                 <Link
                   href={`/admin/orders/${order.id}`}
-                  className="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors"
+                  className="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors text-sm sm:text-base"
                 >
                   View Details
                 </Link>
