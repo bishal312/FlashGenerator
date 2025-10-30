@@ -216,7 +216,7 @@ export default function OrderStatus({ orderRecord }: { orderRecord: Props }) {
                 <div className="text-right">
                   <p className="text-xs text-gray-500">Deposit</p>
                   <p className="text-sm font-semibold text-teal-400">
-                    {orderRecord.fromAmount} TRX
+                    {orderRecord.fromAmount} TRC
                   </p>
                 </div>
               </div>
@@ -239,7 +239,7 @@ export default function OrderStatus({ orderRecord }: { orderRecord: Props }) {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4 pb-3 border-b border-gray-600/50">
                 <p className="text-sm text-gray-400">Deposit Amount</p>
                 <p className="text-sm sm:text-base font-medium text-white">
-                  {orderRecord.fromAmount} TRX
+                  {orderRecord.fromAmount} TRC
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4 pb-3 border-b border-gray-600/50">

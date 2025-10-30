@@ -58,7 +58,7 @@ const SelectAmount = ({ userId, orderId, conversionRate }: Props) => {
             Select Amount
           </h2>
           <p className="text-gray-400 text-sm">
-            Exchange TRX for Flash USDT instantly
+            Exchange TRC for Flash USDT instantly
           </p>
         </div>
         <div className="bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-gray-700 rounded-2xl p-5 sm:p-6 shadow-xl">
@@ -119,12 +119,12 @@ const SelectAmount = ({ userId, orderId, conversionRate }: Props) => {
           <div className="flex justify-between items-center bg-black/40 rounded-xl p-4">
             <div className="flex items-center gap-3">
               <div className="relative h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-red-500/10 p-2">
-                <Image src="/icons/trx.svg" alt="TRX" fill />
+                <Image src="/icons/trx.svg" alt="TRC" fill />
               </div>
               <div>
                 <p className="text-gray-400 text-xs">You pay</p>
                 <p className="text-gray-100 font-semibold text-sm sm:text-base">
-                  TRX
+                  TRC
                 </p>
               </div>
             </div>
@@ -133,7 +133,7 @@ const SelectAmount = ({ userId, orderId, conversionRate }: Props) => {
                 {trxAmount || "0"}
               </p>
               <p className="text-gray-500 text-xs">
-                Rate: 1 TRX = ${(1 / conversionRate).toFixed(4)}
+                Rate: 1 TRC = ${(1 / conversionRate).toFixed(4)}
               </p>
             </div>
           </div>
@@ -145,12 +145,12 @@ const SelectAmount = ({ userId, orderId, conversionRate }: Props) => {
         >
           <div>
             <label className="text-gray-300 font-semibold text-sm sm:text-base mb-2 block">
-              Enter TRX Amount
+              Enter TRC Amount
             </label>
             <div className="relative">
               <input
                 type="number"
-                placeholder="Enter amount (TRX)"
+                placeholder="Enter amount (TRC)"
                 className="w-full bg-black/60 text-gray-100 text-lg p-4 rounded-xl outline-none border border-gray-600 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all"
                 value={trxAmount || ""}
                 onChange={(e) => setTrxAmount(Number(e.target.value))}
@@ -159,7 +159,7 @@ const SelectAmount = ({ userId, orderId, conversionRate }: Props) => {
                 min={MIN_TRX}
               />
               <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 font-medium">
-                TRX
+                TRC
               </span>
             </div>
           </div>
@@ -186,7 +186,7 @@ const SelectAmount = ({ userId, orderId, conversionRate }: Props) => {
                 <AlertCircle className="w-4 h-4 text-amber-500" />
               )}
               <span className={isTrxValid ? "text-green-400" : "text-gray-400"}>
-                Minimum TRX: {MIN_TRX} TRX
+                Minimum TRC: {MIN_TRX} TRC
               </span>
               {trxAmount > 0 && !isTrxValid && (
                 <span className="text-amber-500 text-xs ml-auto">
@@ -272,7 +272,7 @@ const SelectAmount = ({ userId, orderId, conversionRate }: Props) => {
         <div className="bg-blue-950/20 border border-blue-500/20 rounded-xl p-4 flex gap-3">
           <AlertCircle className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" />
           <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
-            Please ensure you have sufficient TRX balance in your wallet before
+            Please ensure you have sufficient TRC balance in your wallet before
             proceeding. The transaction will be processed within 20 minutes
             after confirmation.
           </p>
